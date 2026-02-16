@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# build outputs
+dist/
+*.zip
+
+# env files
+.env
+.env.local
+.env.*.local
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# netlify local state
+.netlify/

@@ -1,1 +1,196 @@
-[]
+[
+  {
+    "id": 1001,
+    "slug": "senior-elixir-back-end-developer",
+    "title": "Senior Elixir Back End Developer",
+    "company": "SafeBoda",
+    "location": "Flexible (Uganda & Nigeria preferred)",
+    "type": "Full-time",
+    "posted": "16 Feb 2026",
+    "category": "Engineering",
+    "summary": "Build and maintain backend systems that power SafeBoda's transport and financial services products.",
+    "description": "SafeBoda is hiring a senior backend engineer to design and maintain scalable backend services for high-frequency transport, payments, and on-demand services across Africa.",
+    "responsibilities": [
+      "Design, build, and maintain reliable backend services and APIs.",
+      "Collaborate with product and mobile teams to deliver production-ready features.",
+      "Debug complex production issues and improve system stability."
+    ],
+    "requirements": [
+      "Strong backend engineering experience with modern API development.",
+      "Experience working in agile teams and shipping high-quality code.",
+      "Strong problem-solving skills and ownership mindset.",
+      "Strong communication skills in English."
+    ],
+    "benefits": [
+      "Competitive salary",
+      "Life and health insurance",
+      "Paid annual leave"
+    ]
+  },
+  {
+    "id": 1002,
+    "slug": "product-owner",
+    "title": "Product Owner",
+    "company": "SafeBoda",
+    "location": "Flexible (Uganda & Nigeria preferred)",
+    "type": "Full-time",
+    "posted": "16 Feb 2026",
+    "category": "Product",
+    "summary": "Lead product roadmap, prioritization, and growth strategy for SafeBoda business verticals.",
+    "description": "SafeBoda is looking for an entrepreneurial Product Owner to lead end-to-end product development across planning, prioritization, user-centered design, testing, and stakeholder communication.",
+    "responsibilities": [
+      "Own product roadmap, daily prioritization, and feature delivery.",
+      "Partner with engineering and leadership to steer product direction.",
+      "Drive product iteration using user feedback and performance data."
+    ],
+    "requirements": [
+      "4+ years of product management, development, or product design experience.",
+      "Strong understanding of agile product development.",
+      "Strong data analysis and stakeholder communication skills.",
+      "Ability to navigate ambiguity and make clear product decisions."
+    ],
+    "benefits": [
+      "Competitive salary",
+      "Life and health insurance",
+      "Supportive team and mentorship"
+    ]
+  },
+  {
+    "id": 1003,
+    "slug": "senior-product-support-engineer-nigeria",
+    "title": "Senior Product Support Engineer - Nigeria",
+    "company": "SafeBoda",
+    "location": "Ibadan, Nigeria",
+    "type": "Full-time",
+    "posted": "16 Feb 2026",
+    "category": "Product Support",
+    "summary": "Bridge engineering and support teams by resolving technical product issues and improving support processes.",
+    "description": "SafeBoda is hiring a Product Support Engineer to investigate quality issues, support customer-facing teams, and improve support operations for product reliability and user experience.",
+    "responsibilities": [
+      "Investigate and document product quality issues requiring technical support.",
+      "Support customer and driver support teams with product guidance.",
+      "Collaborate with product teams on localization and process improvements."
+    ],
+    "requirements": [
+      "3+ years in product development, product management, or product support.",
+      "Basic SQL and software engineering knowledge.",
+      "Strong communication and customer support orientation.",
+      "Ability to work independently and document clearly."
+    ]
+  },
+  {
+    "id": 1004,
+    "slug": "back-end-software-engineering-manager",
+    "title": "Back End Software Engineering Manager",
+    "company": "SafeBoda",
+    "location": "Flexible",
+    "type": "Full-time",
+    "posted": "16 Feb 2026",
+    "category": "Engineering Management",
+    "summary": "Lead backend engineering delivery, people management, and technical direction across core systems.",
+    "description": "SafeBoda is hiring a backend engineering manager to oversee backend architecture, quality standards, team development, and execution across APIs, microservices, databases, and DevOps workflows.",
+    "responsibilities": [
+      "Manage backend engineering teams, delivery quality, and technical standards.",
+      "Oversee backend architecture, system metrics, and production reliability.",
+      "Support hiring, mentoring, and performance of engineering staff."
+    ],
+    "requirements": [
+      "5+ years of software development experience.",
+      "Strong backend architecture and distributed systems knowledge.",
+      "Experience with SQL and NoSQL technologies.",
+      "Demonstrated leadership and strong communication skills."
+    ]
+  },
+  {
+    "id": 1005,
+    "slug": "senior-php-back-end-developer",
+    "title": "Senior PHP Back End Developer",
+    "company": "SafeBoda",
+    "location": "Flexible",
+    "type": "Full-time",
+    "posted": "16 Feb 2026",
+    "category": "Engineering",
+    "summary": "Develop and maintain backend services in PHP to support core SafeBoda products.",
+    "description": "SafeBoda is hiring an experienced PHP backend developer to build and maintain high-quality backend services, working closely with tech leads and product managers.",
+    "responsibilities": [
+      "Build and maintain backend services and APIs in PHP.",
+      "Collaborate with product and engineering leads on delivery.",
+      "Maintain code quality, testing standards, and production stability."
+    ],
+    "requirements": [
+      "5+ years of software development experience.",
+      "Strong experience with PHP and backend frameworks.",
+      "Strong understanding of clean, testable, maintainable code.",
+      "Experience with Git and continuous integration workflows."
+    ]
+  },
+  {
+    "id": 1006,
+    "slug": "ios-developer",
+    "title": "iOS Developer",
+    "company": "SafeBoda",
+    "location": "Flexible",
+    "type": "Full-time",
+    "posted": "16 Feb 2026",
+    "category": "Mobile Engineering",
+    "summary": "Build and maintain high-quality iOS applications for SafeBoda's mobile platform.",
+    "description": "SafeBoda is hiring an iOS developer to design and deliver reliable mobile features using Swift, modern mobile architecture, and agile delivery practices.",
+    "responsibilities": [
+      "Develop iOS features using Swift and clean architecture principles.",
+      "Integrate iOS apps with backend services through RESTful APIs.",
+      "Debug production issues and maintain release quality."
+    ],
+    "requirements": [
+      "Strong hands-on experience with iOS and Swift.",
+      "Experience with REST APIs and modern mobile architecture patterns.",
+      "Familiarity with CI/CD and Agile ways of working.",
+      "Strong communication and teamwork skills."
+    ]
+  },
+  {
+    "id": 1007,
+    "slug": "node-js-back-end-software-engineer",
+    "title": "Node JS Back End Software Engineer",
+    "company": "SafeBoda",
+    "location": "Flexible",
+    "type": "Full-time",
+    "posted": "16 Feb 2026",
+    "category": "Engineering",
+    "summary": "Develop backend services in Node.js to support SafeBoda's core product platforms.",
+    "description": "SafeBoda is hiring a backend software engineer with strong Node.js experience to build scalable APIs and services across driver, passenger, partner, and internal systems.",
+    "responsibilities": [
+      "Build backend features and APIs in Node.js frameworks.",
+      "Collaborate with product and engineering teams in agile delivery.",
+      "Identify and resolve complex production issues."
+    ],
+    "requirements": [
+      "3+ years of backend development experience in Node.js.",
+      "Experience with frameworks such as Express or NestJS.",
+      "Strong software engineering fundamentals and coding standards.",
+      "Proficient use of Git and CI workflows."
+    ]
+  },
+  {
+    "id": 1008,
+    "slug": "devops-engineer",
+    "title": "Dev Ops Engineer",
+    "company": "SafeBoda",
+    "location": "Flexible",
+    "type": "Full-time",
+    "posted": "16 Feb 2026",
+    "category": "DevOps",
+    "summary": "Own containerization, infrastructure automation, observability, and CI/CD for scalable product operations.",
+    "description": "SafeBoda is hiring a DevOps engineer to lead Docker and Kubernetes strategy, improve CI/CD pipelines, and maintain highly available infrastructure for critical production services.",
+    "responsibilities": [
+      "Build and maintain highly available Kubernetes infrastructure.",
+      "Implement and improve CI/CD pipelines and deployment workflows.",
+      "Improve monitoring, alerting, and infrastructure-as-code practices."
+    ],
+    "requirements": [
+      "Strong experience with Docker and containerization technologies.",
+      "Hands-on experience with Kubernetes and observability tools.",
+      "Experience with infrastructure as code (for example Terraform).",
+      "Ability to work independently and collaborate across teams."
+    ]
+  }
+]

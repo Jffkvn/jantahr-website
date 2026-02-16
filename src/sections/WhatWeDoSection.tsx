@@ -128,7 +128,7 @@ const WhatWeDoSection = () => {
               to="/services"
               className="inline-flex items-center gap-2 text-[#2EC3E5] font-medium hover:gap-3 transition-all"
             >
-              Learn more <ArrowRight className="w-4 h-4" />
+              Explore core HR services <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -158,7 +158,7 @@ const WhatWeDoSection = () => {
               to="/services"
               className="inline-flex items-center gap-2 text-[#2EC3E5] font-medium hover:gap-3 transition-all"
             >
-              Learn more <ArrowRight className="w-4 h-4" />
+              Explore AI workplace services <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

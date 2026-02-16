@@ -29,25 +29,29 @@ const Footer = () => {
               <img 
                 src="/logo.png" 
                 alt="JantaHR Consulting" 
+                width={160}
+                height={40}
+                loading="lazy"
+                decoding="async"
                 className="h-10 w-auto"
               />
             </Link>
-            <p className="text-[#6B7A85] text-sm leading-relaxed mb-6">
+            <p className="text-slate-muted text-sm leading-relaxed mb-6">
               Human-centered HR. Practical AI workplace solutions. We help organizations build strong people systems and capable teams.
             </p>
           </div>
 
           {/* Services Column */}
           <div>
-            <h4 className="font-heading font-semibold text-[#0B2B3B] mb-6">
+            <p className="font-heading font-semibold text-[#0B2B3B] mb-6 text-base">
               Services
-            </h4>
+            </p>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.path}
-                    className="text-[#6B7A85] text-sm hover:text-[#006c8b] transition-colors"
+                    className="text-slate-muted text-sm hover:text-[#006c8b] transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -58,15 +62,15 @@ const Footer = () => {
 
           {/* Company Column */}
           <div>
-            <h4 className="font-heading font-semibold text-[#0B2B3B] mb-6">
+            <p className="font-heading font-semibold text-[#0B2B3B] mb-6 text-base">
               Company
-            </h4>
+            </p>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.path}
-                    className="text-[#6B7A85] text-sm hover:text-[#006c8b] transition-colors"
+                    className="text-slate-muted text-sm hover:text-[#006c8b] transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -77,13 +81,13 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div>
-            <h4 className="font-heading font-semibold text-[#0B2B3B] mb-6">
+            <p className="font-heading font-semibold text-[#0B2B3B] mb-6 text-base">
               Contact
-            </h4>
+            </p>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-[#2EC3E5] flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-[#6B7A85]">
+                <div className="text-sm text-slate-muted">
                   <p>+256 776 777034</p>
                   <p>+256 752 600250</p>
                 </div>
@@ -92,14 +96,14 @@ const Footer = () => {
                 <Mail className="w-5 h-5 text-[#2EC3E5] flex-shrink-0" />
                 <a
                   href="mailto:hello@jantahr.com"
-                  className="text-sm text-[#6B7A85] hover:text-[#006c8b] transition-colors"
+                  className="text-sm text-slate-muted hover:text-[#006c8b] transition-colors"
                 >
                   hello@jantahr.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#2EC3E5] flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-[#6B7A85]">
+                <span className="text-sm text-slate-muted">
                   Kampala, Uganda
                 </span>
               </li>
@@ -110,19 +114,19 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-[#0B2B3B]/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-[#6B7A85]">
+            <p className="text-sm text-slate-muted">
               &copy; {currentYear} JantaHR Consulting. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <Link
                 to="/"
-                className="text-sm text-[#6B7A85] hover:text-[#006c8b] transition-colors"
+                className="text-sm text-slate-muted hover:text-[#006c8b] transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
                 to="/"
-                className="text-sm text-[#6B7A85] hover:text-[#006c8b] transition-colors"
+                className="text-sm text-slate-muted hover:text-[#006c8b] transition-colors"
               >
                 Terms of Service
               </Link>

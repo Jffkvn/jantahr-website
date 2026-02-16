@@ -63,11 +63,24 @@ const WhoWeAreSection = () => {
           {/* Image */}
           <div ref={imageRef}>
             <div className="aspect-[4/3] rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(11,43,59,0.10)]">
-              <img
-                src="/who-we-are.jpg"
-                alt="Professional workspace"
-                className="w-full h-full object-cover"
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet="/images/optimized/who-we-are-640.webp 640w, /images/optimized/who-we-are-960.webp 960w"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <img
+                  src="/images/optimized/who-we-are-960.jpg"
+                  srcSet="/images/optimized/who-we-are-640.jpg 640w, /images/optimized/who-we-are-960.jpg 960w"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  alt="Black professionals in a collaborative workspace"
+                  width={960}
+                  height={700}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </picture>
             </div>
           </div>
 
@@ -77,7 +90,7 @@ const WhoWeAreSection = () => {
             <h2 className="font-heading font-bold text-3xl lg:text-4xl text-[#0B2B3B] leading-tight mb-6">
               We partner with organizations to build strong people systems.
             </h2>
-            <div className="space-y-4 text-[#6B7A85] leading-relaxed">
+            <div className="space-y-4 text-[#5B6974] leading-relaxed">
               <p>
                 JantaHR Consulting is a human resources consultancy supporting small and medium 
                 enterprises, growing startups, and established organizations across Uganda and the region. 

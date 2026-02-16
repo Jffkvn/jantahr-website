@@ -4,6 +4,10 @@ node_modules/
 # build outputs
 dist/
 *.zip
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
 
 # env files
 .env

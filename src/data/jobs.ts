@@ -35,7 +35,3 @@ export const buildApplyUrl = (jobTitle?: string, overrideUrl?: string) => {
 };
 
 export const GENERAL_APPLICATION_URL = buildApplyUrl();
-
-// Add or remove jobs here. Leave empty to show the "no openings" message.
-export const jobs: Job[] = [
-];

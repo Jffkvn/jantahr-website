@@ -1,26 +1,21 @@
+import { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './App.css';
 
 // Pages
 import Home from './pages/Home';
 import Services from './pages/Services';
-import About from './pages/About';
-import Team from './pages/Team';
 import Jobs from './pages/Jobs';
-import Contact from './pages/Contact';
-import JobDetail from './pages/JobDetail';
-import AiTrainingPage from './pages/AiTrainingPage';
-import NotFound from './pages/NotFound';
+const About = lazy(() => import('./pages/About'));
+const Team = lazy(() => import('./pages/Team'));
+const Contact = lazy(() => import('./pages/Contact'));
+const JobDetail = lazy(() => import('./pages/JobDetail'));
+const AiTrainingPage = lazy(() => import('./pages/AiTrainingPage'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Components
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+import SeoManager from './components/SeoManager';
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -32,41 +27,34 @@ const ScrollToTop = () => {
   return null;
 };
 
+const RouteLoadingFallback = () => (
+  <div className="mx-auto max-w-content px-6 lg:px-8 py-16" role="status" aria-live="polite">
+    <p className="text-slate-muted">Loading page...</p>
+  </div>
+);
+
 function App() {
-  useEffect(() => {
-    // Configure ScrollTrigger defaults
-    ScrollTrigger.defaults({
-      toggleActions: 'play none none reverse',
-    });
-
-    // Refresh ScrollTrigger after all content loads
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
 
   return (
     <Router>
       <ScrollToTop />
+      <SeoManager />
       <div className="min-h-screen bg-offwhite">
         <Navigation />
         <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/ai-training" element={<AiTrainingPage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/jobs/:slug" element={<JobDetail />} />
-            <Route path="/jobs" element={<Jobs />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<RouteLoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/ai-training" element={<AiTrainingPage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/jobs/:slug" element={<JobDetail />} />
+              <Route path="/jobs" element={<Jobs />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>

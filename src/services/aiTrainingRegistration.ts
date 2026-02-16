@@ -25,6 +25,8 @@ type PublicLeadSubmissionPayload = {
   submittedAt: string;
 };
 
+type WebhookResponsePayload = { ok?: boolean; error?: string };
+
 function isGoogleAppsScriptEndpoint(url: string): boolean {
   try {
     const parsed = new URL(url);
@@ -34,6 +36,18 @@ function isGoogleAppsScriptEndpoint(url: string): boolean {
     );
   } catch {
     return false;
+  }
+}
+
+function parseWebhookResponse(responseText: string): WebhookResponsePayload | null {
+  if (!responseText) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(responseText) as WebhookResponsePayload;
+  } catch {
+    return null;
   }
 }
 
@@ -82,18 +96,9 @@ export async function submitAiTrainingRegistration(
       );
     }
 
-    const responseText = await response.text();
-    if (!responseText) {
-      return;
-    }
-
-    try {
-      const data = JSON.parse(responseText) as { ok?: boolean; error?: string };
-      if (data.ok === false) {
-        throw new Error(data.error || 'AI training registration failed.');
-      }
-    } catch {
-      // Non-JSON success responses are acceptable for webhooks.
+    const data = parseWebhookResponse(await response.text());
+    if (data?.ok === false) {
+      throw new Error(data.error || 'AI training registration failed.');
     }
 
     return;
@@ -128,17 +133,8 @@ export async function submitAiTrainingRegistration(
     throw new Error(errorMessage);
   }
 
-  const responseText = await response.text();
-  if (!responseText) {
-    return;
-  }
-
-  try {
-    const data = JSON.parse(responseText) as { ok?: boolean; error?: string };
-    if (data.ok === false) {
-      throw new Error(data.error || 'AI training registration failed.');
-    }
-  } catch {
-    // Non-JSON success responses are acceptable for webhooks.
+  const data = parseWebhookResponse(await response.text());
+  if (data?.ok === false) {
+    throw new Error(data.error || 'AI training registration failed.');
   }
 }

@@ -114,7 +114,7 @@ const ApproachSection = () => {
               <h3 className="font-heading font-semibold text-xl text-[#0B2B3B] mb-4">
                 {step.title}
               </h3>
-              <p className="text-[#6B7A85] leading-relaxed text-sm">
+              <p className="text-[#5B6974] leading-relaxed text-sm">
                 {step.description}
               </p>
             </div>

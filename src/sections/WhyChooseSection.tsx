@@ -89,7 +89,7 @@ const WhyChooseSection = () => {
                 <div className="w-6 h-6 rounded-full bg-[#2EC3E5]/20 flex items-center justify-center flex-shrink-0">
                   <Check className="w-4 h-4 text-[#2EC3E5]" />
                 </div>
-                <span className="text-[#6B7A85] text-base lg:text-lg">
+                <span className="text-[#5B6974] text-base lg:text-lg">
                   {benefit}
                 </span>
               </li>

@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import { useEffect, useState } from 'react';
 import HeroSection from '../sections/HeroSection';
 import WhoWeAreSection from '../sections/WhoWeAreSection';
 import WhatWeDoSection from '../sections/WhatWeDoSection';
@@ -10,60 +7,34 @@ import WhyChooseSection from '../sections/WhyChooseSection';
 import ClientsSection from '../sections/ClientsSection';
 import CTASection from '../sections/CTASection';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Home = () => {
+  const [showDeferredSections, setShowDeferredSections] = useState(false);
+
   useEffect(() => {
-    let snapTrigger: ScrollTrigger | null = null;
+    let timeoutId: number | undefined;
+    let idleCallbackId: number | undefined;
 
-    // Global snap configuration for pinned sections
-    const setupSnap = () => {
-      const pinned = ScrollTrigger.getAll()
-        .filter(st => st.vars.pin)
-        .sort((a, b) => a.start - b.start);
-      
-      const maxScroll = ScrollTrigger.maxScroll(window);
-      
-      if (!maxScroll || pinned.length === 0) return;
+    const hasIdleCallback = typeof window.requestIdleCallback === 'function';
 
-      const pinnedRanges = pinned.map(st => ({
-        start: st.start / maxScroll,
-        end: (st.end ?? st.start) / maxScroll,
-        center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
-      }));
-
-      snapTrigger = ScrollTrigger.create({
-        snap: {
-          snapTo: (value: number) => {
-            const inPinned = pinnedRanges.some(
-              r => value >= r.start - 0.02 && value <= r.end + 0.02
-            );
-            if (!inPinned) return value;
-
-            const target = pinnedRanges.reduce(
-              (closest, r) =>
-                Math.abs(r.center - value) < Math.abs(closest - value)
-                  ? r.center
-                  : closest,
-              pinnedRanges[0]?.center ?? 0
-            );
-            return target;
-          },
-          duration: { min: 0.15, max: 0.35 },
-          delay: 0,
-          ease: 'power2.out',
+    if (hasIdleCallback) {
+      idleCallbackId = window.requestIdleCallback(
+        () => {
+          setShowDeferredSections(true);
         },
-      });
-    };
-
-    // Delay to ensure all ScrollTriggers are created
-    const timer = setTimeout(setupSnap, 500);
+        { timeout: 800 },
+      );
+    } else {
+      timeoutId = window.setTimeout(() => {
+        setShowDeferredSections(true);
+      }, 350);
+    }
 
     return () => {
-      clearTimeout(timer);
-      if (snapTrigger) {
-        snapTrigger.kill();
-        snapTrigger = null;
+      if (typeof idleCallbackId === 'number' && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(idleCallbackId);
+      }
+      if (typeof timeoutId === 'number') {
+        window.clearTimeout(timeoutId);
       }
     };
   }, []);
@@ -71,12 +42,16 @@ const Home = () => {
   return (
     <div className="bg-offwhite">
       <HeroSection />
-      <WhoWeAreSection />
-      <WhatWeDoSection />
-      <ApproachSection />
-      <WhyChooseSection />
-      <ClientsSection />
-      <CTASection />
+      {showDeferredSections ? (
+        <>
+          <WhoWeAreSection />
+          <WhatWeDoSection />
+          <ApproachSection />
+          <WhyChooseSection />
+          <ClientsSection />
+          <CTASection />
+        </>
+      ) : null}
     </div>
   );
 };

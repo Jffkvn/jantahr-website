@@ -71,11 +71,25 @@ const HeroSection = () => {
         ref={imageRef}
         className="absolute left-0 top-0 w-full lg:w-[55%] h-full"
       >
-        <img
-          src="/hero-office.jpg"
-          alt="Team collaboration"
-          className="w-full h-full object-cover"
-        />
+        <picture>
+          <source
+            type="image/webp"
+            srcSet="/images/optimized/hero-office-640.webp 640w, /images/optimized/hero-office-960.webp 960w, /images/optimized/hero-office-1280.webp 1280w"
+            sizes="(max-width: 1024px) 100vw, 55vw"
+          />
+          <img
+            src="/images/optimized/hero-office-1280.jpg"
+            srcSet="/images/optimized/hero-office-640.jpg 640w, /images/optimized/hero-office-960.jpg 960w, /images/optimized/hero-office-1280.jpg 1280w"
+            sizes="(max-width: 1024px) 100vw, 55vw"
+            alt="Black professionals collaborating in a modern office"
+            width={1280}
+            height={853}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
+        </picture>
         {/* Gradient overlay for mobile */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#0B2B3B]/90 lg:to-transparent" />
       </div>
@@ -87,7 +101,7 @@ const HeroSection = () => {
       >
         <div className="px-6 lg:px-12 xl:px-16 py-20 lg:py-0 w-full">
           {/* Micro Label */}
-          <p className="animate-item text-xs font-semibold uppercase tracking-[0.12em] text-[#2EC3E5] mb-6">
+          <p className="animate-item inline-flex rounded-full bg-[#F6F7F9]/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#0B2B3B] mb-6">
             JANTAHR CONSULTING
           </p>
 

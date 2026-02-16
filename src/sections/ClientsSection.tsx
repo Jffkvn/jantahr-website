@@ -101,7 +101,7 @@ const ClientsSection = () => {
             <h2 className="font-heading font-bold text-3xl lg:text-4xl text-[#0B2B3B] leading-tight mb-6">
               Serving diverse organizations
             </h2>
-            <p className="text-[#6B7A85] leading-relaxed">
+            <p className="text-[#5B6974] leading-relaxed">
               We support clients across sectors, from local businesses to organizations 
               with regional and international operations. Our experience spans multiple 
               industries, allowing us to bring best practices and fresh perspectives to every engagement.
@@ -119,7 +119,7 @@ const ClientsSection = () => {
                 >
                   0
                 </span>
-                <span className="text-[#6B7A85] text-sm">Organizations supported</span>
+                <span className="text-[#5B6974] text-sm">Organizations supported</span>
               </div>
               <div>
                 <span
@@ -128,7 +128,7 @@ const ClientsSection = () => {
                 >
                   0
                 </span>
-                <span className="text-[#6B7A85] text-sm">Industries served</span>
+                <span className="text-[#5B6974] text-sm">Industries served</span>
               </div>
             </div>
 

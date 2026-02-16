@@ -91,11 +91,24 @@ const CTASection = () => {
           {/* Image */}
           <div ref={imageRef} className="order-1 lg:order-2">
             <div className="aspect-[4/5] rounded-[22px] overflow-hidden shadow-[0_30px_70px_rgba(11,43,59,0.18)]">
-              <img
-                src="/cta-team.jpg"
-                alt="Team member"
-                className="w-full h-full object-cover"
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet="/images/optimized/cta-team-640.webp 640w, /images/optimized/cta-team-960.webp 960w"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                <img
+                  src="/images/optimized/cta-team-960.jpg"
+                  srcSet="/images/optimized/cta-team-640.jpg 640w, /images/optimized/cta-team-960.jpg 960w"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  alt="Black professionals planning during a team strategy session"
+                  width={960}
+                  height={1440}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </picture>
             </div>
           </div>
         </div>

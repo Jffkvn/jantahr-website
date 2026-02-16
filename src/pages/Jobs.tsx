@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Search, MapPin, Briefcase, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { jobs, GENERAL_APPLICATION_URL } from '@/data/jobs';
+import { GENERAL_APPLICATION_URL, type Job } from '@/data/jobs';
 import {
   Select,
   SelectContent,
@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { fetchJobs } from '@/services/jobsService';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,6 +24,32 @@ const Jobs = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterLocation, setFilterLocation] = useState('all');
   const [filterType, setFilterType] = useState('all');
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [isLoadingJobs, setIsLoadingJobs] = useState(true);
+  const [jobsError, setJobsError] = useState<string | null>(null);
+
+  const loadJobs = useCallback(async (signal?: AbortSignal) => {
+    setIsLoadingJobs(true);
+    setJobsError(null);
+
+    try {
+      const loadedJobs = await fetchJobs(signal);
+      if (signal?.aborted) {
+        return;
+      }
+      setJobs(loadedJobs);
+    } catch {
+      if (signal?.aborted) {
+        return;
+      }
+      setJobs([]);
+      setJobsError('Unable to load job openings right now. Please try again shortly.');
+    } finally {
+      if (!signal?.aborted) {
+        setIsLoadingJobs(false);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -61,6 +88,15 @@ const Jobs = () => {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const controller = new AbortController();
+    void loadJobs(controller.signal);
+
+    return () => {
+      controller.abort();
+    };
+  }, [loadJobs]);
+
   const filteredJobs = jobs.filter(job => {
     const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -96,7 +132,30 @@ const Jobs = () => {
         </div>
       </section>
 
-      {hasJobs ? (
+      {isLoadingJobs ? (
+        <section className="py-20 lg:py-28 bg-white">
+          <div className="max-w-content mx-auto px-6 lg:px-8 text-center">
+            <h2 className="font-heading font-bold text-2xl lg:text-3xl text-teal-deep mb-4">
+              Loading opportunities
+            </h2>
+            <p className="text-slate-muted max-w-2xl mx-auto">
+              Please wait while we load current openings.
+            </p>
+          </div>
+        </section>
+      ) : jobsError ? (
+        <section className="py-20 lg:py-28 bg-white">
+          <div className="max-w-content mx-auto px-6 lg:px-8 text-center">
+            <h2 className="font-heading font-bold text-2xl lg:text-3xl text-teal-deep mb-4">
+              Unable to load jobs
+            </h2>
+            <p className="text-slate-muted max-w-2xl mx-auto mb-8">{jobsError}</p>
+            <Button className="btn-primary" onClick={() => void loadJobs()}>
+              Try Again
+            </Button>
+          </div>
+        </section>
+      ) : hasJobs ? (
         <>
           {/* Search & Filter Section */}
           <section className="py-8 bg-white border-b border-teal-deep/10">
@@ -116,7 +175,10 @@ const Jobs = () => {
 
                 {/* Location Filter */}
                 <Select value={filterLocation} onValueChange={setFilterLocation}>
-                  <SelectTrigger className="w-full lg:w-48 h-12 rounded-xl border-teal-deep/20">
+                  <SelectTrigger
+                    aria-label="Filter jobs by location"
+                    className="w-full lg:w-48 h-12 rounded-xl border-teal-deep/20"
+                  >
                     <SelectValue placeholder="Location" />
                   </SelectTrigger>
                   <SelectContent>
@@ -130,7 +192,10 @@ const Jobs = () => {
 
                 {/* Type Filter */}
                 <Select value={filterType} onValueChange={setFilterType}>
-                  <SelectTrigger className="w-full lg:w-48 h-12 rounded-xl border-teal-deep/20">
+                  <SelectTrigger
+                    aria-label="Filter jobs by job type"
+                    className="w-full lg:w-48 h-12 rounded-xl border-teal-deep/20"
+                  >
                     <SelectValue placeholder="Job Type" />
                   </SelectTrigger>
                   <SelectContent>

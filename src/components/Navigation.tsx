@@ -53,6 +53,10 @@ const Navigation = () => {
               <img 
                 src="/logo.png" 
                 alt="JantaHR Consulting" 
+                width={160}
+                height={40}
+                decoding="async"
+                fetchPriority="high"
                 className="h-10 w-auto"
               />
             </Link>
@@ -90,6 +94,8 @@ const Navigation = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden p-2 rounded-lg hover:bg-[#0B2B3B]/5 transition-colors"
               aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6 text-[#0B2B3B]" />
@@ -114,6 +120,7 @@ const Navigation = () => {
           onClick={() => setIsMobileMenuOpen(false)}
         />
         <div
+          id="mobile-menu"
           className={`absolute top-20 left-4 right-4 bg-[#F6F7F9] rounded-2xl shadow-[0_30px_70px_rgba(11,43,59,0.18)] p-6 transition-all duration-300 ${
             isMobileMenuOpen
               ? 'translate-y-0 opacity-100'

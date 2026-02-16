@@ -20,7 +20,7 @@ module.exports = {
         },
         offwhite: "#F6F7F9",
         slate: {
-          muted: "#6B7A85",
+          muted: "#5B6974",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",

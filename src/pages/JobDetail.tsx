@@ -1,11 +1,93 @@
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MapPin, Briefcase, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { buildApplyUrl, jobs } from '@/data/jobs';
+import { buildApplyUrl, type Job } from '@/data/jobs';
+import { fetchJobBySlug } from '@/services/jobsService';
 
 const JobDetail = () => {
   const { slug } = useParams();
-  const job = jobs.find((item) => item.slug === slug);
+  const [job, setJob] = useState<Job | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  const loadJob = useCallback(async (signal?: AbortSignal) => {
+    if (!slug) {
+      setJob(null);
+      setIsLoading(false);
+      return;
+    }
+
+    setIsLoading(true);
+    setLoadError(null);
+
+    try {
+      const loadedJob = await fetchJobBySlug(slug, signal);
+      if (signal?.aborted) {
+        return;
+      }
+      setJob(loadedJob);
+    } catch {
+      if (signal?.aborted) {
+        return;
+      }
+      setJob(null);
+      setLoadError('Unable to load this job right now. Please try again shortly.');
+    } finally {
+      if (!signal?.aborted) {
+        setIsLoading(false);
+      }
+    }
+  }, [slug]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    void loadJob(controller.signal);
+
+    return () => {
+      controller.abort();
+    };
+  }, [loadJob]);
+
+  if (isLoading) {
+    return (
+      <div className="bg-offwhite pt-20">
+        <section className="py-20 lg:py-28 bg-white">
+          <div className="max-w-content mx-auto px-6 lg:px-8 text-center">
+            <h1 className="font-heading font-bold text-2xl lg:text-3xl text-teal-deep mb-4">
+              Loading job details
+            </h1>
+            <p className="text-slate-muted max-w-2xl mx-auto">
+              Please wait while we load this role.
+            </p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <div className="bg-offwhite pt-20">
+        <section className="py-20 lg:py-28 bg-white">
+          <div className="max-w-content mx-auto px-6 lg:px-8 text-center">
+            <h1 className="font-heading font-bold text-2xl lg:text-3xl text-teal-deep mb-4">
+              Unable to load job
+            </h1>
+            <p className="text-slate-muted max-w-2xl mx-auto mb-8">{loadError}</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button className="btn-primary" onClick={() => void loadJob()}>
+                Try Again
+              </Button>
+              <Button variant="outline" className="h-12 rounded-[14px]" asChild>
+                <Link to="/jobs">Back to Jobs</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   if (!job) {
     return (

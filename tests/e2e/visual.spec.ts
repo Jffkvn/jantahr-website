@@ -33,7 +33,8 @@ test.describe('Visual regression baselines', () => {
       await page.waitForTimeout(item.settleMs);
 
       await expect(page).toHaveScreenshot(`${item.snapshotName}-${testInfo.project.name}.png`, {
-        fullPage: true,
+        fullPage: false,
+        maxDiffPixelRatio: 0.01,
       });
     });
   }

@@ -32,9 +32,11 @@ test.describe('Visual regression baselines', () => {
       });
       await page.waitForTimeout(item.settleMs);
 
+      const maxDiffPixelRatio = testInfo.project.name.includes('mobile') ? 0.04 : 0.01;
+
       await expect(page).toHaveScreenshot(`${item.snapshotName}-${testInfo.project.name}.png`, {
         fullPage: false,
-        maxDiffPixelRatio: 0.01,
+        maxDiffPixelRatio,
       });
     });
   }

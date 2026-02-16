@@ -118,12 +118,21 @@ test('contact form submits successfully', async ({ page }) => {
   const emailInput = page.getByLabel(/Email Address/i);
   const nameInput = page.getByLabel(/Full Name/i);
   const messageInput = page.getByLabel(/^Message \*/i);
+  const submitButton = page.getByRole('button', { name: /Send Message/i });
 
   await nameInput.fill('Jeff Adhaya');
   await emailInput.fill('jeff@example.com');
   await messageInput.fill('Need HR advisory support.');
 
-  await page.getByRole('button', { name: /Send Message/i }).click();
+  const submissionRequest = page.waitForRequest(
+    (request) => request.method() === 'POST' && request.url().includes('formspree.io'),
+    { timeout: 15_000 },
+  );
+
+  await expect(submitButton).toBeEnabled();
+  await submitButton.click({ force: true });
+  await submissionRequest;
+
   await expect(page.getByRole('heading', { name: /Message Sent!/i })).toBeVisible({
     timeout: 30_000,
   });

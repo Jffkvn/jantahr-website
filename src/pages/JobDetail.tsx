@@ -109,7 +109,7 @@ const JobDetail = () => {
     );
   }
 
-  const applyUrl = buildApplyUrl(job.title, job.applyUrl);
+  const applyUrl = buildApplyUrl(job, job.applyUrl);
 
   return (
     <div className="bg-offwhite pt-20">

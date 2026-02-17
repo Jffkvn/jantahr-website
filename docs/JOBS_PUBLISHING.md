@@ -40,6 +40,37 @@ Optional fields:
 - `benefits` (string array)
 - `applyUrl` (string URL; if omitted, Google Form prefill is used)
 
+## Google Form mapping requirements
+
+The job apply flow prefills metadata into your Google Form using `entry.*` keys.
+
+Required form question label:
+
+- `Role you are applying for`
+
+Recommended hidden/auto-populated fields in the same form:
+
+- `roleSlug`
+- `externalJobId`
+- `companyName`
+- `sourcePage`
+
+Recommended candidate profile fields in the same form:
+
+- `currentRole`
+- `sector`
+- `skills`
+- `yearsExperience`
+
+Set these environment variables in Netlify and local `.env`:
+
+- `VITE_GOOGLE_FORM_BASE_URL`
+- `VITE_GOOGLE_FORM_ROLE_TITLE_KEY`
+- `VITE_GOOGLE_FORM_ROLE_SLUG_KEY`
+- `VITE_GOOGLE_FORM_COMPANY_KEY`
+- `VITE_GOOGLE_FORM_SOURCE_PAGE_KEY`
+- `VITE_GOOGLE_FORM_JOB_ID_KEY`
+
 ## Copy-paste template
 
 ```json
@@ -103,6 +134,16 @@ git add public/data/jobs.json
 git commit -m "Add new job openings"
 git push
 ```
+
+## End-to-end test (one job post)
+
+1. Open one job detail page (for example `/jobs/node-js-back-end-software-engineer`).
+2. Click `Apply Now`.
+3. Confirm Google Form opens with:
+- `Role you are applying for` prefilled with the job title.
+- metadata fields populated for `roleSlug`, `externalJobId`, `companyName`, and `sourcePage`.
+4. Submit a test response.
+5. Confirm internal app candidate/application records map to the correct role (not `General Application`).
 
 ## Rollback (if needed)
 

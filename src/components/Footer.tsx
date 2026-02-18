@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Instagram, Twitter } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -39,6 +39,35 @@ const Footer = () => {
             <p className="text-slate-muted text-sm leading-relaxed mb-6">
               Human-centered HR. Practical AI workplace solutions. We help organizations build strong people systems and capable teams.
             </p>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/company/jantahr/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-full bg-[#0B2B3B]/5 flex items-center justify-center text-[#0B2B3B] hover:bg-[#006c8b]/10 hover:text-[#006c8b] transition-colors"
+                aria-label="JantaHR on LinkedIn"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.instagram.com/janta_hr/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-full bg-[#0B2B3B]/5 flex items-center justify-center text-[#0B2B3B] hover:bg-[#006c8b]/10 hover:text-[#006c8b] transition-colors"
+                aria-label="JantaHR on Instagram"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://x.com/janta_hr"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-full bg-[#0B2B3B]/5 flex items-center justify-center text-[#0B2B3B] hover:bg-[#006c8b]/10 hover:text-[#006c8b] transition-colors"
+                aria-label="JantaHR on X"
+              >
+                <Twitter className="w-4 h-4" />
+              </a>
+            </div>
           </div>
 
           {/* Services Column */}
@@ -92,14 +121,22 @@ const Footer = () => {
                   <p>+256 752 600250</p>
                 </div>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#2EC3E5] flex-shrink-0" />
-                <a
-                  href="mailto:hello@jantahr.com"
-                  className="text-sm text-slate-muted hover:text-[#006c8b] transition-colors"
-                >
-                  hello@jantahr.com
-                </a>
+                <div className="text-sm">
+                  <a
+                    href="mailto:hello@jantahr.com"
+                    className="block text-slate-muted hover:text-[#006c8b] transition-colors"
+                  >
+                    hello@jantahr.com
+                  </a>
+                  <a
+                    href="mailto:jantahrconsult@gmail.com"
+                    className="block text-slate-muted hover:text-[#006c8b] transition-colors"
+                  >
+                    jantahrconsult@gmail.com
+                  </a>
+                </div>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#2EC3E5] flex-shrink-0 mt-0.5" />

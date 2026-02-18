@@ -14,6 +14,10 @@ describe('Footer', () => {
       'href',
       'mailto:hello@jantahr.com',
     );
+    expect(screen.getByRole('link', { name: 'jantahrconsult@gmail.com' })).toHaveAttribute(
+      'href',
+      'mailto:jantahrconsult@gmail.com',
+    );
   });
 
   it('shows current year in the copyright text', () => {

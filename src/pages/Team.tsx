@@ -5,6 +5,15 @@ import { Linkedin, Mail } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+type TeamMember = {
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+  linkedinUrl?: string;
+  objectPosition?: string;
+};
+
 const Team = () => {
   const heroRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -47,42 +56,27 @@ const Team = () => {
     return () => ctx.revert();
   }, []);
 
-  const teamMembers = [
+  const teamMembers: TeamMember[] = [
     {
-      name: 'Sarah Namukasa',
+      name: 'Dora Agai',
       role: 'Founder & Managing Director',
       bio: 'Over 15 years of experience in HR leadership and organizational development across East Africa.',
-      image: '/team-1.jpg',
+      image: '/images/team/dora-agai.jpg',
+      linkedinUrl: 'https://www.linkedin.com/in/dora-agai-24599947/',
     },
     {
-      name: 'David Okello',
-      role: 'Senior HR Consultant',
-      bio: 'Specializes in compensation strategy and HR technology implementation for growing organizations.',
-      image: '/team-2.jpg',
+      name: 'Jeff Adhaya',
+      role: 'Applied AI Workforce Strategy Consultant',
+      bio: 'Specializes in aligning AI capabilities with workforce strategy and organizational growth.',
+      image: '/images/team/jeff-adhaya.jpg',
+      linkedinUrl: 'https://www.linkedin.com/in/jeff-adhaya-b691b935/',
+      objectPosition: '50% 10%',
     },
     {
       name: 'Grace Auma',
       role: 'Training & Development Lead',
       bio: 'Expert in leadership development and organizational change management.',
       image: '/team-3.jpg',
-    },
-    {
-      name: 'Michael Kintu',
-      role: 'Recruitment Specialist',
-      bio: 'Focuses on inclusive hiring practices and talent acquisition strategy.',
-      image: '/team-4.jpg',
-    },
-    {
-      name: 'Patricia Nalwoga',
-      role: 'HR Technology Consultant',
-      bio: 'Helps organizations select and optimize HR systems for improved efficiency.',
-      image: '/team-5.jpg',
-    },
-    {
-      name: 'Robert Ssemanda',
-      role: 'Compliance & Policy Advisor',
-      bio: 'Expert in employment law and HR policy development across multiple sectors.',
-      image: '/team-6.jpg',
     },
   ];
 
@@ -130,6 +124,7 @@ const Team = () => {
                     height={1024}
                     loading="lazy"
                     decoding="async"
+                    style={member.objectPosition ? { objectPosition: member.objectPosition } : undefined}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -149,9 +144,11 @@ const Team = () => {
                   {/* Social Links */}
                   <div className="flex items-center gap-3">
                     <a
-                      href="#"
+                      href={member.linkedinUrl || '#'}
                       className="w-8 h-8 rounded-full bg-teal-deep/5 flex items-center justify-center hover:bg-cyan-accent/20 transition-colors"
                       aria-label={`${member.name}'s LinkedIn`}
+                      target={member.linkedinUrl ? '_blank' : undefined}
+                      rel={member.linkedinUrl ? 'noreferrer' : undefined}
                     >
                       <Linkedin className="w-4 h-4 text-teal-deep" />
                     </a>

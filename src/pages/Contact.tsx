@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Linkedin, Instagram, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -124,7 +124,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email',
-      details: ['hello@jantahr.com'],
+      details: ['hello@jantahr.com', 'jantahrconsult@gmail.com'],
     },
     {
       icon: MapPin,
@@ -178,14 +178,57 @@ const Contact = () => {
                       <h3 className="font-heading font-semibold text-teal-deep mb-2">
                         {item.title}
                       </h3>
-                      {item.details.map((detail, detailIndex) => (
-                        <p key={detailIndex} className="text-slate-muted">
-                          {detail}
-                        </p>
-                      ))}
+                      {item.title === 'Email'
+                        ? item.details.map((detail, detailIndex) => (
+                            <a
+                              key={detailIndex}
+                              href={`mailto:${detail}`}
+                              className="block text-slate-muted hover:text-[#006c8b] transition-colors"
+                            >
+                              {detail}
+                            </a>
+                          ))
+                        : item.details.map((detail, detailIndex) => (
+                            <p key={detailIndex} className="text-slate-muted">
+                              {detail}
+                            </p>
+                          ))}
                     </div>
                   </div>
                 ))}
+              </div>
+
+              <div className="mt-10">
+                <h3 className="font-heading font-semibold text-teal-deep mb-4">Follow Us</h3>
+                <div className="flex items-center gap-3">
+                  <a
+                    href="https://www.linkedin.com/company/jantahr/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-10 h-10 rounded-full bg-cyan-accent/10 flex items-center justify-center text-teal-deep hover:bg-cyan-accent/20 transition-colors"
+                    aria-label="JantaHR on LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/janta_hr/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-10 h-10 rounded-full bg-cyan-accent/10 flex items-center justify-center text-teal-deep hover:bg-cyan-accent/20 transition-colors"
+                    aria-label="JantaHR on Instagram"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://x.com/janta_hr"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-10 h-10 rounded-full bg-cyan-accent/10 flex items-center justify-center text-teal-deep hover:bg-cyan-accent/20 transition-colors"
+                    aria-label="JantaHR on X"
+                  >
+                    <Twitter className="w-5 h-5" />
+                  </a>
+                </div>
               </div>
 
               {/* Working Hours */}

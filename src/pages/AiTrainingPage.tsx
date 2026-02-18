@@ -258,14 +258,16 @@ const AiTrainingPage = () => {
               </div>
             </div>
 
-            <div
-              className="ai-training-hero-image-placeholder rounded-2xl border border-offwhite/20 bg-offwhite/10 shadow-card-lg min-h-[320px] sm:min-h-[380px] flex items-center justify-center p-8"
-              role="img"
-              aria-label="Group of Black professionals in smart casual attire learning about AI in a modern training room"
-            >
-              <p className="text-center text-sm text-offwhite/80 max-w-xs">
-                Hero image placeholder
-              </p>
+            <div className="rounded-2xl overflow-hidden border border-offwhite/20 shadow-card-lg min-h-[320px] sm:min-h-[380px]">
+              <img
+                src="/images/ai-training/ai-training-hero.jpg"
+                alt="Group of Black professionals in smart casual attire learning about AI in a modern training room"
+                width={1280}
+                height={853}
+                decoding="async"
+                loading="eager"
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -326,23 +328,27 @@ const AiTrainingPage = () => {
           </p>
 
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div
-              className="ai-training-scene-placeholder-1 rounded-2xl border border-teal-deep/10 bg-offwhite shadow-card min-h-[220px] flex items-center justify-center p-6"
-              role="img"
-              aria-label="Black professionals in smart casual clothing during an AI training session"
-            >
-              <p className="text-sm text-slate-muted text-center max-w-xs">
-                Training scene placeholder
-              </p>
+            <div className="rounded-2xl overflow-hidden border border-teal-deep/10 shadow-card min-h-[220px]">
+              <img
+                src="/images/ai-training/ai-training-session.jpg"
+                alt="Black professionals in smart casual clothing during an AI training session"
+                width={1280}
+                height={853}
+                decoding="async"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
-            <div
-              className="ai-training-scene-placeholder-2 rounded-2xl border border-teal-deep/10 bg-offwhite shadow-card min-h-[220px] flex items-center justify-center p-6"
-              role="img"
-              aria-label="Team members collaborating on laptops during AI awareness training"
-            >
-              <p className="text-sm text-slate-muted text-center max-w-xs">
-                Collaboration scene placeholder
-              </p>
+            <div className="rounded-2xl overflow-hidden border border-teal-deep/10 shadow-card min-h-[220px]">
+              <img
+                src="/images/ai-training/ai-training-collaboration.jpg"
+                alt="Team members collaborating on laptops during AI awareness training"
+                width={1280}
+                height={853}
+                decoding="async"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>

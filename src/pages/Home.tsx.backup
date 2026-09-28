@@ -1,0 +1,21 @@
+import Hero from '@/sections/Hero'
+import BridgeSection from '@/sections/BridgeSection'
+import ServicesTeaser from '@/sections/ServicesTeaser'
+import PlatformTeaser from '@/sections/PlatformTeaser'
+import StatsSection from '@/sections/StatsSection'
+import ApproachSection from '@/sections/ApproachSection'
+import CTASection from '@/sections/CTASection'
+
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <BridgeSection />
+      <ServicesTeaser />
+      <PlatformTeaser />
+      <StatsSection />
+      <ApproachSection />
+      <CTASection />
+    </>
+  )
+}

@@ -13,6 +13,7 @@ const About = lazy(() => import('@/pages/About'))
 const Team = lazy(() => import('@/pages/Team'))
 const Contact = lazy(() => import('@/pages/Contact'))
 const Jobs = lazy(() => import('@/pages/Jobs'))
+const JobDetail = lazy(() => import('@/pages/JobDetail'))
 const Pricing = lazy(() => import('@/pages/Pricing'))
 const Privacy = lazy(() => import('@/pages/Privacy'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
@@ -42,6 +43,7 @@ export default function App() {
               <Route path="/team" element={<Team />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/jobs" element={<Jobs />} />
+              <Route path="/jobs/:slug" element={<JobDetail />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

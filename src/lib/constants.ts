@@ -38,3 +38,10 @@ export const AI_TRAINING_ENDPOINT =
   import.meta.env.VITE_AI_TRAINING_REGISTRATION_ENDPOINT?.trim()
 
 export const SITE_URL = (import.meta.env.VITE_SITE_URL?.trim() || BRAND.url).replace(/\/$/, '')
+
+export const JOBS_ENDPOINT =
+  import.meta.env.VITE_JOBS_ENDPOINT?.trim() || '/data/jobs.json'
+
+export const CANDIDATE_ENDPOINT =
+  import.meta.env.VITE_CANDIDATE_ENDPOINT?.trim() || ''
+

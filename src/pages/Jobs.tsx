@@ -2,20 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Briefcase, Search, MapPin, Building2, Clock, ArrowRight, CheckCircle2, UserCheck, UploadCloud } from 'lucide-react'
 import Reveal from '@/components/effects/Reveal'
-
-type Job = {
-  id: number
-  slug: string
-  title: string
-  company: string
-  location: string
-  type: string
-  posted: string
-  category: string
-  summary: string
-  description: string
-  applyUrl?: string
-}
+import type { Job } from '@/types/jobs'
+import { fetchJobs } from '@/services/jobsService'
 
 export default function Jobs() {
   const [jobs, setJobs] = useState<Job[]>([])
@@ -24,23 +12,30 @@ export default function Jobs() {
   const [searchQuery, setSearchQuery] = useState<string>('')
 
   useEffect(() => {
-    fetch('/data/jobs.json')
-      .then((r) => r.json())
-      .then((data) => setJobs(Array.isArray(data) ? data : []))
+    const controller = new AbortController()
+    fetchJobs(controller.signal)
+      .then((data) => setJobs(data))
       .catch(() => setJobs([]))
       .finally(() => setLoading(false))
+
+    return () => {
+      controller.abort()
+    }
   }, [])
 
   const categories = ['All', 'Finance & Accounting', 'Technology & Engineering', 'Human Resources', 'Sales & Business Development']
 
   const filteredJobs = jobs.filter((job) => {
     const matchesCat = selectedCategory === 'All' || job.category === selectedCategory
+    const companyName = job.company || ''
+    const summaryText = job.summary || ''
     const matchesQuery =
       job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.summary.toLowerCase().includes(searchQuery.toLowerCase())
+      companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      summaryText.toLowerCase().includes(searchQuery.toLowerCase())
     return matchesCat && matchesQuery
   })
+
 
   return (
     <div className="bg-offwhite text-ink">
@@ -138,7 +133,7 @@ export default function Jobs() {
                       <div className="space-y-3">
                         <div className="flex flex-wrap items-center gap-2.5">
                           <span className="rounded-full bg-teal-primary/10 px-3 py-1 text-xs font-semibold text-teal-primary">
-                            {job.category}
+                            {job.category || 'Executive Mandate'}
                           </span>
                           <span className="rounded-full bg-ink/[0.04] px-3 py-1 text-xs font-medium text-slate-muted">
                             Mandate #{job.id}
@@ -146,21 +141,26 @@ export default function Jobs() {
                         </div>
 
                         <h3 className="font-heading text-xl font-bold text-ink sm:text-2xl">
-                          {job.title}
+                          <Link
+                            to={`/jobs/${job.slug}`}
+                            className="transition-colors hover:text-teal-primary"
+                          >
+                            {job.title}
+                          </Link>
                         </h3>
 
                         <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-muted sm:text-sm">
                           <span className="inline-flex items-center gap-1.5 text-ink">
                             <Building2 className="h-4 w-4 text-teal-primary" />
-                            Client: {job.company}
+                            Client: {job.company || 'Corporate Client'}
                           </span>
                           <span className="inline-flex items-center gap-1.5">
                             <MapPin className="h-4 w-4 text-teal-primary" />
-                            {job.location}
+                            {job.location || 'Uganda'}
                           </span>
                           <span className="inline-flex items-center gap-1.5">
                             <Clock className="h-4 w-4 text-teal-primary" />
-                            {job.type}
+                            {job.employmentType || job.type || 'Full-time'}
                           </span>
                         </div>
 
@@ -171,10 +171,10 @@ export default function Jobs() {
 
                       <div className="shrink-0 pt-2 lg:pt-0">
                         <Link
-                          to="/contact"
+                          to={`/jobs/${job.slug}`}
                           className="btn btn-primary btn-md w-full justify-center lg:w-auto"
                         >
-                          Apply for Position
+                          View &amp; Apply
                           <ArrowRight className="h-4 w-4" />
                         </Link>
                       </div>

@@ -60,6 +60,14 @@ const ROUTE_META: Array<{ pattern: RegExp; meta: PageMeta }> = [
     },
   },
   {
+    pattern: /^\/jobs\/[a-z0-9-]+\/?$/,
+    meta: {
+      title: 'Open Mandate & Career Opportunity | JantaHR',
+      description:
+        'Explore role specifications, requirements, and apply directly via JantaHR executive search and recruitment.',
+    },
+  },
+  {
     pattern: /^\/pricing\/?$/,
     meta: {
       title: 'Pricing & Packages | JantaHR Software & Consulting',

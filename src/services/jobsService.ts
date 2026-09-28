@@ -33,6 +33,21 @@ export function normalizeJobsPayload(payload: unknown): Job[] {
     const company = (raw.company as string) ?? 'Corporate Client'
     const category = (raw.category as string) ?? 'General Management'
     const applyUrl = (raw.applyUrl as string) ?? undefined
+    const rawQuestions = Array.isArray(raw.screeningQuestions)
+      ? raw.screeningQuestions
+      : Array.isArray(raw.screening_questions)
+      ? raw.screening_questions
+      : undefined
+
+    const screeningQuestions = rawQuestions
+      ? rawQuestions.map((q: any) => ({
+          id: String(q.id || `q_${Math.random()}`),
+          question: String(q.question || ''),
+          type: (q.type as 'text' | 'number' | 'select' | 'boolean') || 'text',
+          required: Boolean(q.required),
+          options: Array.isArray(q.options) ? q.options.map(String) : undefined,
+        }))
+      : undefined
 
     return {
       id,
@@ -45,6 +60,7 @@ export function normalizeJobsPayload(payload: unknown): Job[] {
       requirements,
       salaryMin,
       salaryMax,
+      screeningQuestions,
       postedAt,
       closesAt,
       company,

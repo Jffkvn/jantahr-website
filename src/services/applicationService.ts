@@ -17,6 +17,7 @@ export interface ApplicationPayload {
   salaryExpectation?: number
   cvPath?: string
   vacancySlug: string
+  screeningAnswers?: Record<string, string | number | boolean>
   honeypot?: string
   submittedAt?: string
 }

@@ -10,6 +10,36 @@
     "posted": "September 2026",
     "summary": "Leading financial strategy, statutory URA compliance, treasury management, and regional operational reporting for an expanding freight group.",
     "description": "Our client, a prominent East African transport and freight forwarding company, is seeking an experienced Head of Finance & Operations to oversee core financial controls, audit preparedness, and cross-border customs reconciliation.",
+    "requirements": "• Minimum 7+ years of progressive financial management and operational accounting experience\n• Certified Public Accountant (CPA-U or ACCA) in good standing\n• Demonstrable experience managing URA corporate tax, PAYE audits, and customs clearing reconciliation\n• Advanced proficiency in ERP systems (SAP, Navision, or NetSuite)\n• Prior experience leading cross-functional teams across East Africa",
+    "salaryMin": 6500000,
+    "salaryMax": 10000000,
+    "screeningQuestions": [
+      {
+        "id": "sq_years_exp",
+        "question": "How many years of commercial financial controller or senior accounting experience do you have?",
+        "type": "number",
+        "required": true
+      },
+      {
+        "id": "sq_cpa",
+        "question": "Are you a fully certified member of CPA Uganda (ICPAU) or ACCA in good standing?",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "id": "sq_erp",
+        "question": "Which enterprise ERP system are you most proficient in?",
+        "type": "select",
+        "required": true,
+        "options": ["SAP Business One / S4HANA", "Microsoft Dynamics 365 / Navision", "Oracle NetSuite", "QuickBooks Enterprise", "TallyPrime", "Other"]
+      },
+      {
+        "id": "sq_relocation",
+        "question": "Are you currently based in Kampala or able to commute to the Industrial Area office daily?",
+        "type": "boolean",
+        "required": false
+      }
+    ],
     "applyUrl": "https://forms.gle/jantahr-talent-mandates"
   },
   {

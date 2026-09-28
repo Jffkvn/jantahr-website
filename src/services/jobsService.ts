@@ -49,6 +49,18 @@ export function normalizeJobsPayload(payload: unknown): Job[] {
         }))
       : undefined
 
+    const responsibilities = Array.isArray(raw.responsibilities)
+      ? (raw.responsibilities as string[])
+      : typeof raw.responsibilities === 'string'
+      ? (raw.responsibilities as string).split('\n').map((s) => s.replace(/^[•\-\*]\s*/, '').trim()).filter(Boolean)
+      : undefined
+
+    const benefits = Array.isArray(raw.benefits)
+      ? (raw.benefits as string[])
+      : typeof raw.benefits === 'string'
+      ? (raw.benefits as string).split('\n').map((s) => s.replace(/^[•\-\*]\s*/, '').trim()).filter(Boolean)
+      : undefined
+
     return {
       id,
       slug,
@@ -58,6 +70,8 @@ export function normalizeJobsPayload(payload: unknown): Job[] {
       summary,
       description,
       requirements,
+      responsibilities,
+      benefits,
       salaryMin,
       salaryMax,
       screeningQuestions,

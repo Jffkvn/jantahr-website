@@ -59,7 +59,7 @@ export default function Jobs() {
               Recruitment Process Outsourcing (RPO)
             </span>
             <h1 className="mt-5 font-heading text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Open Client Mandates &amp; Careers
+              Open Roles &amp; Careers
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-base text-white/75 sm:text-lg">
               JantaHR recruits on behalf of leading corporate organizations, high-growth startups, and international development institutions across Uganda and East Africa.
@@ -113,7 +113,7 @@ export default function Jobs() {
               <Briefcase className="mx-auto h-12 w-12 text-slate-muted opacity-40" />
               <h3 className="mt-4 font-heading text-xl font-bold text-ink">No matching vacancies found</h3>
               <p className="mx-auto mt-2 max-w-md text-sm text-slate-muted">
-                Try adjusting your search filters or submit your CV to our general talent pool. We contact registered candidates as new client mandates arise.
+                Try adjusting your search filters or submit your CV to our general talent pool. We contact registered candidates as new client roles open.
               </p>
               <a href="#talent-pool" className="btn btn-primary btn-md mt-6 inline-flex items-center gap-2">
                 Submit Your CV to Talent Pool
@@ -123,7 +123,7 @@ export default function Jobs() {
           ) : (
             <div className="space-y-4">
               <p className="text-xs font-bold uppercase tracking-wider text-slate-muted mb-4">
-                Showing {filteredJobs.length} Active Mandate{filteredJobs.length > 1 ? 's' : ''}
+                Showing {filteredJobs.length} Open Position{filteredJobs.length > 1 ? 's' : ''}
               </p>
 
               {filteredJobs.map((job, idx) => (
@@ -133,10 +133,10 @@ export default function Jobs() {
                       <div className="space-y-3">
                         <div className="flex flex-wrap items-center gap-2.5">
                           <span className="rounded-full bg-teal-primary/10 px-3 py-1 text-xs font-semibold text-teal-primary">
-                            {job.category || 'Executive Mandate'}
+                            {job.category || 'Professional Role'}
                           </span>
                           <span className="rounded-full bg-ink/[0.04] px-3 py-1 text-xs font-medium text-slate-muted">
-                            Mandate #{job.id}
+                            Job #{job.id}
                           </span>
                         </div>
 
@@ -267,7 +267,7 @@ export default function Jobs() {
               Don&apos;t See a Role Matching Your Profile?
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/75">
-              Submit your curriculum vitae to the JantaHR Confidential Talent Pool. When our corporate clients request private executive mandates or specialized skills, we search our vetted candidate network first.
+              Submit your curriculum vitae to the JantaHR Confidential Talent Pool. When our corporate clients request specialized skills or look to fill unadvertised roles, we search our vetted candidate network first.
             </p>
             <div className="mt-8 flex justify-center">
               <Link to="/contact" className="btn btn-primary btn-lg inline-flex items-center gap-2">

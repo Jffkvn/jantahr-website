@@ -84,7 +84,12 @@ export default function AiTraining() {
 
     try {
       if (!AI_TRAINING_ENDPOINT) {
-        console.log('AI training registration (no endpoint):', payload)
+        // Fallback when endpoint is not yet configured: direct mailto client
+        const subject = encodeURIComponent(`AI Training Booking: ${form.trainingUnit || 'General'}`)
+        const body = encodeURIComponent(
+          `Name: ${form.fullName}\nEmail: ${form.email}\nPhone: ${form.phone}\nOrganization: ${form.organization}\nTraining Unit: ${form.trainingUnit}\nNotes: ${form.notes}`
+        )
+        window.location.href = `mailto:hello@jantahr.com?subject=${subject}&body=${body}`
         setSuccess(true)
       } else {
         const isAppsScript = new URL(AI_TRAINING_ENDPOINT).hostname.endsWith('script.google.com')
@@ -94,13 +99,13 @@ export default function AiTraining() {
           body: JSON.stringify(payload),
         })
         if (!res.ok) throw new Error(`Failed with status ${res.status}`)
+        setSuccess(true)
       }
 
       setForm(initialForm)
       setErrors({})
-      setSuccess(true)
     } catch {
-      setSubmitError('Something went wrong. Please try again or contact us directly.')
+      setSubmitError('Something went wrong. Please try again or contact us directly at hello@jantahr.com.')
     } finally {
       setSubmitting(false)
     }

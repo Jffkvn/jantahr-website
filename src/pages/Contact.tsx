@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Mail, Phone, MapPin, Linkedin, Instagram, Twitter, Send, CheckCircle } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Mail, Phone, MapPin, Linkedin, Instagram, Twitter, Send, CheckCircle, Briefcase } from 'lucide-react'
 import Reveal from '@/components/effects/Reveal'
 import PageHero from '@/components/ui/PageHero'
 import { BRAND, FORMSPREE_ENDPOINT } from '@/lib/constants'
@@ -165,21 +166,6 @@ export default function Contact() {
                   ))}
                 </div>
               </div>
-
-              <div className="mt-8 overflow-hidden rounded-3xl border border-ink/[0.06] shadow-card">
-                <div className="relative aspect-video">
-                  <img
-                    src="/images/services/hr-outsourcing.jpg"
-                    alt="JantaHR consulting office in Kampala"
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-teal-deep/70 via-transparent to-transparent" />
-                  <p className="absolute bottom-3 left-4 text-xs font-semibold text-white">
-                    Kampala Office · In-Person &amp; Remote Consultations
-                  </p>
-                </div>
-              </div>
             </Reveal>
 
             <Reveal direction="right">
@@ -199,6 +185,20 @@ export default function Contact() {
                     <h2 className="font-heading text-2xl font-bold tracking-tight text-ink">
                       Send us a message
                     </h2>
+
+                    <div className="mt-5 flex items-start gap-3 rounded-2xl border border-teal-primary/20 bg-teal-primary/5 p-4 text-xs text-ink/80">
+                      <Briefcase className="mt-0.5 h-4 w-4 shrink-0 text-teal-primary" />
+                      <div>
+                        <span className="font-semibold text-teal-primary">Looking to submit your CV or join our Talent Pool?</span>
+                        <p className="mt-0.5 text-slate-muted">
+                          This contact form is for client and business inquiries. Jobseekers and professionals should use our{' '}
+                          <Link to="/jobs#cv-upload" className="font-semibold text-teal-primary underline hover:text-teal-deep">
+                            Direct CV Upload Form on the Careers page &rarr;
+                          </Link>
+                        </p>
+                      </div>
+                    </div>
+
                     <form onSubmit={handleSubmit} className="mt-7 space-y-5">
                       <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
                       <input type="hidden" name="_subject" value="New Contact Form Submission" />

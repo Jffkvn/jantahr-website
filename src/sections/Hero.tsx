@@ -35,9 +35,9 @@ export default function Hero() {
               src="/images/optimized/hero-office-1280.jpg"
               srcSet="/images/optimized/hero-office-640.jpg 640w, /images/optimized/hero-office-960.jpg 960w, /images/optimized/hero-office-1280.jpg 1280w"
               sizes="(max-width: 1024px) 100vw, 52vw"
-              alt="Professionals collaborating in a modern office"
+              alt="African corporate professionals collaborating in a modern East African office"
               width={1280}
-              height={853}
+              height={714}
               loading="eager"
               fetchPriority="high"
               decoding="async"
@@ -128,7 +128,7 @@ export default function Hero() {
               className="mt-10 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-8"
             >
               {[
-                { icon: Building2, label: '120+ organizations' },
+                { icon: Building2, label: '20+ organizations' },
                 { icon: Users, label: '15+ industries' },
                 { icon: ShieldCheck, label: 'URA-ready payroll' },
               ].map(({ icon: Icon, label }) => (

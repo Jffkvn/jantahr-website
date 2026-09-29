@@ -3,7 +3,7 @@ import Counter from '@/components/effects/Counter'
 
 const STATS = [
   { value: 15, suffix: '+', label: 'Years of HR leadership in East Africa' },
-  { value: 120, suffix: '+', label: 'Organizations served across sectors' },
+  { value: 20, suffix: '+', label: 'Organizations served across sectors' },
   { value: 8, suffix: '+', label: 'Integrated JantaHR OneHub modules' },
   { value: 100, suffix: '%', label: 'Statutory URA & NSSF compliant math' },
 ]

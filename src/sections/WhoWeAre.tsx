@@ -25,9 +25,9 @@ export default function WhoWeAre() {
                     src="/images/optimized/who-we-are-960.jpg"
                     srcSet="/images/optimized/who-we-are-640.jpg 640w, /images/optimized/who-we-are-960.jpg 960w"
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    alt="Professionals collaborating in a modern workspace"
+                    alt="African HR executive leading organizational development in East Africa"
                     width={960}
-                    height={700}
+                    height={716}
                     loading="lazy"
                     decoding="async"
                     className="h-full w-full object-cover"

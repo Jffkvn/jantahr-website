@@ -34,7 +34,7 @@ export default function Clients() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="rounded-3xl border border-ink/[0.06] bg-offwhite p-6 shadow-soft sm:p-8">
                   <p className="font-heading text-4xl font-extrabold tracking-tight text-teal-deep sm:text-5xl lg:text-[3.25rem]">
-                    <Counter value={120} suffix="+" />
+                    <Counter value={20} suffix="+" />
                   </p>
                   <p className="mt-2 text-sm font-medium text-slate-muted">Organizations supported</p>
                 </div>

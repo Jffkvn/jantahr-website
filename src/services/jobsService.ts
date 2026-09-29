@@ -103,37 +103,9 @@ export async function fetchJobs(signal?: AbortSignal): Promise<Job[]> {
     const payload = (await response.json()) as unknown
     const normalized = normalizeJobsPayload(payload)
 
-    // If the endpoint returned an empty list (e.g. no vacancies published yet in Ops)
-    // and we're not already loading local jobs.json, gracefully fallback to local demo data
-    if (normalized.length === 0 && JOBS_ENDPOINT !== '/data/jobs.json') {
-      try {
-        const fallbackRes = await fetch('/data/jobs.json', { signal })
-        if (fallbackRes.ok) {
-          const fallbackData = (await fallbackRes.json()) as unknown
-          return normalizeJobsPayload(fallbackData)
-        }
-      } catch {
-        // Fallback failed
-      }
-    }
-
     return normalized
   } catch (err) {
     if (signal?.aborted) throw err
-
-    // If the configured endpoint failed and is not already local jobs.json, attempt local fallback
-    if (JOBS_ENDPOINT !== '/data/jobs.json') {
-      try {
-        const fallbackRes = await fetch('/data/jobs.json', { signal })
-        if (fallbackRes.ok) {
-          const fallbackData = (await fallbackRes.json()) as unknown
-          return normalizeJobsPayload(fallbackData)
-        }
-      } catch {
-        // Fallback failed as well
-      }
-    }
-
     return []
   }
 }

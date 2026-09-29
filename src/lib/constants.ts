@@ -40,8 +40,11 @@ export const AI_TRAINING_ENDPOINT =
 export const SITE_URL = (import.meta.env.VITE_SITE_URL?.trim() || BRAND.url).replace(/\/$/, '')
 
 export const JOBS_ENDPOINT =
-  import.meta.env.VITE_JOBS_ENDPOINT?.trim() || '/data/jobs.json'
+  import.meta.env.VITE_JOBS_ENDPOINT?.trim() ||
+  'https://qjsgqskigjqrzjftunhg.supabase.co/functions/v1/public-jobs'
 
 export const CANDIDATE_ENDPOINT =
-  import.meta.env.VITE_CANDIDATE_ENDPOINT?.trim() || ''
+  import.meta.env.VITE_CANDIDATE_ENDPOINT?.trim() ||
+  'https://qjsgqskigjqrzjftunhg.supabase.co/functions/v1/public-candidates'
+
 

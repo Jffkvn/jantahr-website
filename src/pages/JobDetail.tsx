@@ -19,7 +19,6 @@ import {
   Calendar,
   Banknote,
   ShieldCheck,
-  Mail,
   Loader2,
   HelpCircle,
   Share2,
@@ -30,7 +29,6 @@ import {
 import type { Job, ScreeningQuestion } from '@/types/jobs'
 import { fetchJobBySlug } from '@/services/jobsService'
 import {
-  isCandidateEndpointConfigured,
   getUploadUrl,
   uploadCvFile,
   submitCandidateApplication,
@@ -91,8 +89,6 @@ export default function JobDetail() {
 
   const resumeInputRef = useRef<HTMLInputElement>(null)
   const coverLetterInputRef = useRef<HTMLInputElement>(null)
-
-  const isEndpointConfigured = isCandidateEndpointConfigured()
 
   const {
     register,
@@ -666,48 +662,6 @@ export default function JobDetail() {
                     <Link to="/jobs" className="btn btn-primary btn-md">
                       View Other Open Roles
                     </Link>
-                  </div>
-                </div>
-              ) : !isEndpointConfigured ? (
-                /* Direct Email Fallback */
-                <div>
-                  <div className="flex items-center justify-between border-b border-ink/[0.06] pb-4">
-                    <div>
-                      <h3 className="font-heading text-2xl font-bold text-ink">Apply for this Role</h3>
-                      <p className="text-xs text-slate-muted mt-1">{job.title} · Job #{job.id}</p>
-                    </div>
-                    <span className="rounded-full bg-teal-primary/10 px-3 py-1 text-xs font-semibold text-teal-primary">
-                      Open Position
-                    </span>
-                  </div>
-
-                  <div className="mt-6 space-y-4">
-                    <p className="text-sm leading-relaxed text-slate-muted sm:text-base">
-                      To apply for this role, please email your CV and a brief introduction directly to our team:
-                    </p>
-
-                    <div className="rounded-2xl border border-teal-primary/20 bg-teal-primary/5 p-5">
-                      <p className="text-xs font-bold uppercase tracking-wider text-teal-primary">
-                        Direct Email
-                      </p>
-                      <a
-                        href={`mailto:hello@jantahr.com?subject=Application:%20${encodeURIComponent(job.title)}%20(Job%20%23${job.id})`}
-                        className="mt-1.5 block font-heading text-lg font-bold text-ink hover:text-teal-primary transition-colors"
-                      >
-                        hello@jantahr.com
-                      </a>
-                      <p className="mt-1 text-xs text-slate-muted">
-                        Subject: Application: {job.title} (Job #{job.id})
-                      </p>
-                    </div>
-
-                    <a
-                      href={`mailto:hello@jantahr.com?subject=Application:%20${encodeURIComponent(job.title)}%20(Job%20%23${job.id})`}
-                      className="btn btn-primary btn-lg inline-flex items-center gap-2"
-                    >
-                      <Mail className="h-4 w-4" />
-                      Send Application via Email
-                    </a>
                   </div>
                 </div>
               ) : (

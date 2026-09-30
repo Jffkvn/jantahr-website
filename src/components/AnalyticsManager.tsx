@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 
-const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID?.trim()
+const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID?.trim() || 'G-9R6N7X6LN3'
 
 /**
  * Custom event helper to track user actions (form submissions, CV drops, button clicks)

@@ -41,11 +41,13 @@ export default function AnalyticsManager() {
       send_page_view: false,
     })
 
-    // Create and inject the async script tag
-    const script = document.createElement('script')
-    script.async = true
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
-    document.head.appendChild(script)
+    // Check if script tag is already in head (e.g. from index.html)
+    if (!document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_ID}"]`)) {
+      const script = document.createElement('script')
+      script.async = true
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
+      document.head.appendChild(script)
+    }
 
     scriptInjectedRef.current = true
   }, [])

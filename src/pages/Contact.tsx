@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Linkedin, Instagram, Twitter, Send, CheckCircle, B
 import Reveal from '@/components/effects/Reveal'
 import PageHero from '@/components/ui/PageHero'
 import { BRAND, FORMSPREE_ENDPOINT } from '@/lib/constants'
+import { trackEvent } from '@/components/AnalyticsManager'
 
 type ContactForm = {
   name: string
@@ -68,6 +69,11 @@ export default function Contact() {
       })
 
       if (!res.ok) throw new Error(`Failed with status ${res.status}`)
+
+      trackEvent('generate_lead', {
+        event_category: 'Contact',
+        event_label: form.interest || 'General',
+      })
 
       setForm(initial)
       setErrors({})

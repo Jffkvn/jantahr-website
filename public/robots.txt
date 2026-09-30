@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jantahr.netlify.app/sitemap.xml
+Sitemap: https://jantahr.com/sitemap.xml

@@ -16,13 +16,17 @@
       property="og:description"
       content="Practical HR consulting, workplace training, and a payroll & HR platform built for East Africa."
     />
-    <meta property="og:url" content="https://jantahr.netlify.app/" />
-    <meta property="og:image" content="/logo.png" />
+    <meta property="og:url" content="https://jantahr.com/" />
+    <meta property="og:image" content="https://jantahr.com/images/optimized/hero-office-1280.jpg" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
+    <meta property="og:image:alt" content="JantaHR team of HR consultants and payroll specialists in East Africa" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://jantahr.com/images/optimized/hero-office-1280.jpg" />
     <meta name="theme-color" content="#0B2B3B" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="canonical" href="https://jantahr.netlify.app/" />
+    <link rel="canonical" href="https://jantahr.com/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -45,21 +49,66 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "JantaHR",
-        "url": "https://jantahr.netlify.app/",
-        "logo": "https://jantahr.netlify.app/logo.png",
-        "email": "hello@jantahr.com",
-        "telephone": "+256776777034",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Kampala",
-          "addressCountry": "UG"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/company/jantahr/",
-          "https://www.instagram.com/janta_hr/",
-          "https://x.com/janta_hr"
+        "@graph": [
+          {
+            "@type": ["Organization", "ProfessionalService", "EmploymentAgency"],
+            "@id": "https://jantahr.com/#organization",
+            "name": "JantaHR Consulting",
+            "alternateName": "JantaHR",
+            "url": "https://jantahr.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://jantahr.com/logo.png"
+            },
+            "image": "https://jantahr.com/images/optimized/hero-office-1280.jpg",
+            "description": "Human-centered HR consulting, recruitment process outsourcing (RPO), staff training, and payroll software tailored for Uganda and East Africa.",
+            "email": "hello@jantahr.com",
+            "telephone": "+256776777034",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Kampala",
+              "addressCountry": "UG"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 0.3476,
+              "longitude": 32.5825
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "08:00",
+                "closes": "18:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Saturday",
+                "opens": "09:00",
+                "closes": "13:00"
+              }
+            ],
+            "areaServed": [
+              { "@type": "Country", "name": "Uganda" },
+              { "@type": "Country", "name": "Kenya" },
+              { "@type": "Country", "name": "Rwanda" },
+              { "@type": "Country", "name": "Tanzania" }
+            ],
+            "sameAs": [
+              "https://www.linkedin.com/company/jantahr/",
+              "https://www.instagram.com/janta_hr/",
+              "https://x.com/janta_hr"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://jantahr.com/#website",
+            "url": "https://jantahr.com/",
+            "name": "JantaHR",
+            "publisher": { "@id": "https://jantahr.com/#organization" },
+            "inLanguage": "en"
+          }
         ]
       }
     </script>

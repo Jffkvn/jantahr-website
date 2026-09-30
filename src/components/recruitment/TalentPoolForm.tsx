@@ -21,6 +21,7 @@ import {
   submitCandidateApplication,
 } from '@/services/applicationService'
 import { formatUgandanPhone } from '@/lib/phone'
+import { trackEvent } from '@/components/AnalyticsManager'
 
 const ALLOWED_MIME_TYPES = [
   'application/pdf',
@@ -174,6 +175,12 @@ export default function TalentPoolForm({ onClose }: TalentPoolFormProps) {
           linkedinUrl: data.linkedinUrl || '',
         },
         honeypot: data.honeypot,
+      })
+
+      trackEvent('submit_application', {
+        event_category: 'Recruitment',
+        event_label: data.discipline,
+        country: data.country,
       })
 
       setSubmittedCandidate({ name: fullName, discipline: data.discipline })

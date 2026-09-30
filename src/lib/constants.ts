@@ -3,7 +3,7 @@ export const BRAND = {
   legalName: 'JantaHR Consulting',
   tagline: 'Human-centered HR. Practical payroll tech.',
   domain: 'jantahr.com',
-  url: 'https://jantahr.netlify.app',
+  url: 'https://jantahr.com',
   email: 'hello@jantahr.com',
   emailAlt: 'jantahrconsult@gmail.com',
   phones: ['+256 776 777034', '+256 752 600250'],

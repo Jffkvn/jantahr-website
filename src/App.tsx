@@ -4,6 +4,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import ScrollToTop from '@/components/layout/ScrollToTop'
 import SeoManager from '@/components/SeoManager'
+import AnalyticsManager from '@/components/AnalyticsManager'
 import Home from '@/pages/Home'
 
 const Services = lazy(() => import('@/pages/Services'))
@@ -29,6 +30,7 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <SeoManager />
+      <AnalyticsManager />
       <div className="flex min-h-screen flex-col bg-offwhite">
         <Navbar />
         <main className="flex-1">

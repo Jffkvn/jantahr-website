@@ -209,3 +209,40 @@ The audit confirmed the following controls were already properly in place:
 ### 7.6 Remaining Recommendations (Non-Critical)
 - **Enable reCAPTCHA/Turnstile on Formspree**: The Formspree form ID (`xnjbagpr`) is visible in the bundled JS. Enable CAPTCHA in the Formspree dashboard to prevent direct POST spam.
 - **Server-side file magic byte validation**: The backend checks MIME strings but not actual file content signatures. A future enhancement could verify PDF magic bytes (`%PDF-`) and DOCX ZIP signatures (`PK`) on the uploaded file.
+
+---
+
+## 8. Google SEO, Domain Canonicalization & Google Analytics 4 (September 30, 2026)
+
+With `jantahr.com` and `hello@jantahr.com` live, the codebase was updated for proper Google indexing, domain canonicalization, structured data, and visitor analytics.
+
+### 8.1 Domain Canonicalization & Site URL Updates
+- Updated `BRAND.url` in `src/lib/constants.ts` to `https://jantahr.com`.
+- Updated `VITE_SITE_URL` in `.env` to `https://jantahr.com`.
+- Updated `public/sitemap.xml`: all 10 canonical URLs updated from `https://jantahr.netlify.app` to `https://jantahr.com`.
+- Updated `public/robots.txt` to point to `Sitemap: https://jantahr.com/sitemap.xml`.
+- Updated `index.html` canonical link and Open Graph tags (`og:url`, `og:image`, `twitter:image`).
+
+### 8.2 Google Structured Data (Schema.org / JSON-LD)
+Enhanced `index.html` with a unified `@graph` definition:
+- **`Organization` & `ProfessionalService` & `EmploymentAgency`**:
+  * Formal name: `JantaHR Consulting` (alternateName: `JantaHR`)
+  * Physical & Geo: Kampala, Uganda (GeoCoordinates `0.3476, 32.5825`)
+  * Service Area: East Africa (Uganda, Kenya, Rwanda, Tanzania)
+  * Opening Hours: Monday–Friday 08:00–18:00, Saturday 09:00–13:00
+  * Social profiles (`sameAs`): LinkedIn, Instagram, X (Twitter)
+- **`WebSite`**:
+  * Canonical site entity linked to the publisher organization.
+
+### 8.3 Google Analytics 4 (GA4) SPA Integration
+- Created `src/components/AnalyticsManager.tsx`:
+  * Supports `VITE_GA_MEASUREMENT_ID` (e.g. `G-XXXXXXXXXX`).
+  * Asynchronously loads `gtag.js` only when the Measurement ID is provided.
+  * SPA-aware: listens to React Router route changes (`useLocation()`) and sends accurate `page_view` events with `page_path`, `page_title`, and `page_location` (prevents SPAs from only logging the landing page).
+  * Exports `trackEvent()` utility for conversion tracking.
+- Tracked Key Conversions:
+  * **Contact Inquiry**: `generate_lead` fired upon successful contact form submission in `src/pages/Contact.tsx`.
+  * **CV Drop / Talent Pool**: `submit_application` fired upon successful candidate registration in `src/components/recruitment/TalentPoolForm.tsx`.
+- Updated Content-Security-Policy (CSP) in `public/_headers`:
+  * Whitelisted `https://www.googletagmanager.com` in `script-src`.
+  * Whitelisted `*.google-analytics.com`, `*.analytics.google.com`, `*.googletagmanager.com` in `connect-src` and `img-src`.

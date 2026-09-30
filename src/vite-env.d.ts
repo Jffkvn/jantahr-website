@@ -6,8 +6,15 @@ interface ImportMetaEnv {
   readonly VITE_SITE_URL?: string
   readonly VITE_JOBS_ENDPOINT?: string
   readonly VITE_CANDIDATE_ENDPOINT?: string
+  readonly VITE_GA_MEASUREMENT_ID?: string
 }
 
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+interface Window {
+  dataLayer?: unknown[]
+  gtag?: (...args: unknown[]) => void
+}
+

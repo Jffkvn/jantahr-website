@@ -212,19 +212,37 @@ The audit confirmed the following controls were already properly in place:
 
 ---
 
-## 8. Google SEO, Domain Canonicalization & Google Analytics 4 (September 30, 2026)
+## 8. Domain, Email, Google SEO & Analytics Infrastructure (September 30, 2026)
 
-With `jantahr.com` and `hello@jantahr.com` live, the codebase was updated for proper Google indexing, domain canonicalization, structured data, and visitor analytics.
+On September 30, 2026, the brand migrated from its temporary staging environment (`jantahr.netlify.app`) to its permanent production domain (`jantahr.com`), launched secure corporate email, integrated Google Analytics 4, and submitted the site for priority indexing in Google Search Console.
 
-### 8.1 Domain Canonicalization & Site URL Updates
+### 8.1 Domain & DNS Architecture (Namecheap cPanel + Netlify CDN)
+A split-routing architecture was implemented to decouple website hosting (Netlify Global Edge CDN) from business email and administrative hosting (Namecheap Shared cPanel):
+
+| Record Type | Host / Name | Target / Value | Purpose |
+|:---|:---|:---|:---|
+| **A** | `jantahr.com.` | `75.2.60.5` | Points apex root domain to Netlify Anycast Load Balancer |
+| **CNAME** | `www.jantahr.com.` | `jantahr.netlify.app.` | Routes `www` subdomain to Netlify CDN edge |
+| **MX** | `jantahr.com.` | `mail.jantahr.com.` (Priority 0) | Directs inbound business mail to cPanel mail server |
+| **A** | `mail.jantahr.com.` | Namecheap Shared Server IP | Dedicated mail server host |
+| **TXT (SPF)** | `jantahr.com.` | `v=spf1 +a +mx +ip4:... ~all` | Authorizes Namecheap mail server to send on behalf of domain |
+| **TXT (DKIM)** | `default._domainkey` | Cryptographic public key | Cryptographically validates outbound email authenticity |
+
+### 8.2 SSL/TLS Security Provisioning (100% Free Tier)
+- **Website SSL**: Netlify automatically provisioned a free, auto-renewing **Let's Encrypt TLS certificate** covering both `jantahr.com` and `www.jantahr.com`.
+- **Email & Webmail SSL**: Executed **cPanel AutoSSL (Sectigo)** across `mail.jantahr.com`, `cpanel.jantahr.com`, and webmail subdomains. Guarantees that mobile and desktop email clients (iOS Mail, Outlook, Apple Mail) connect over encrypted TLS/SSL without security warnings.
+- **Active Business Mailbox**: `hello@jantahr.com` provisioned and tested.
+
+### 8.3 Website Domain Canonicalization
+To prevent Google from indexing the Netlify subdomain and to consolidate search authority on `jantahr.com`:
 - Updated `BRAND.url` in `src/lib/constants.ts` to `https://jantahr.com`.
 - Updated `VITE_SITE_URL` in `.env` to `https://jantahr.com`.
 - Updated `public/sitemap.xml`: all 10 canonical URLs updated from `https://jantahr.netlify.app` to `https://jantahr.com`.
 - Updated `public/robots.txt` to point to `Sitemap: https://jantahr.com/sitemap.xml`.
 - Updated `index.html` canonical link and Open Graph tags (`og:url`, `og:image`, `twitter:image`).
 
-### 8.2 Google Structured Data (Schema.org / JSON-LD)
-Enhanced `index.html` with a unified `@graph` definition:
+### 8.4 Google Structured Data (Schema.org / JSON-LD)
+Enhanced `index.html` with a unified `@graph` specification for rich search appearance:
 - **`Organization` & `ProfessionalService` & `EmploymentAgency`**:
   * Formal name: `JantaHR Consulting` (alternateName: `JantaHR`)
   * Physical & Geo: Kampala, Uganda (GeoCoordinates `0.3476, 32.5825`)
@@ -234,15 +252,20 @@ Enhanced `index.html` with a unified `@graph` definition:
 - **`WebSite`**:
   * Canonical site entity linked to the publisher organization.
 
-### 8.3 Google Analytics 4 (GA4) SPA Integration
-- Created `src/components/AnalyticsManager.tsx`:
-  * Supports `VITE_GA_MEASUREMENT_ID` (e.g. `G-XXXXXXXXXX`).
-  * Asynchronously loads `gtag.js` only when the Measurement ID is provided.
-  * SPA-aware: listens to React Router route changes (`useLocation()`) and sends accurate `page_view` events with `page_path`, `page_title`, and `page_location` (prevents SPAs from only logging the landing page).
-  * Exports `trackEvent()` utility for conversion tracking.
-- Tracked Key Conversions:
-  * **Contact Inquiry**: `generate_lead` fired upon successful contact form submission in `src/pages/Contact.tsx`.
-  * **CV Drop / Talent Pool**: `submit_application` fired upon successful candidate registration in `src/components/recruitment/TalentPoolForm.tsx`.
-- Updated Content-Security-Policy (CSP) in `public/_headers`:
-  * Whitelisted `https://www.googletagmanager.com` in `script-src`.
-  * Whitelisted `*.google-analytics.com`, `*.analytics.google.com`, `*.googletagmanager.com` in `connect-src` and `img-src`.
+### 8.5 Google Analytics 4 (GA4) Integration
+- **Property Created**: `JantaHR` / Web Stream: `JantaHR Web` (`https://www.jantahr.com`).
+- **Measurement ID**: `G-9R6N7X6LN3`.
+- **Dual-Layer Architecture**:
+  1. **Static HTML Detection**: Embedded official `gtag.js` script snippet in `index.html` `<head>` for immediate detection by Google's automated diagnostic scrapers.
+  2. **SPA Route Tracking**: Created `src/components/AnalyticsManager.tsx` hooked into React Router's `useLocation()` to send accurate `page_view` events with `page_path`, `page_title`, and `page_location` on client-side route transitions (preventing SPA single-hit blindspots).
+  3. **Custom Conversion Events**:
+     - `generate_lead`: Fired upon successful contact form submission (`src/pages/Contact.tsx`).
+     - `submit_application`: Fired upon successful talent pool CV submission (`src/components/recruitment/TalentPoolForm.tsx`).
+- **Security Whitelisting (CSP)**: Updated `public/_headers` to allow `https://www.googletagmanager.com` in `script-src` and `*.google-analytics.com` / `*.analytics.google.com` in `connect-src` and `img-src`.
+- **Diagnostics Status**: Verified in Google Tag Manager as **Tag quality: Excellent** (all green bars, sending live data).
+
+### 8.6 Google Search Console Verification & Priority Indexing
+- **Property Added**: `https://www.jantahr.com/` registered in Google Search Console.
+- **Ownership Verification**: Automatically verified in 1 second via the active Google Analytics tag (`gtag.js`).
+- **Sitemap Submission**: Submitted `https://www.jantahr.com/sitemap.xml`. Search Console returned **Status: Success** with all **10 discovered pages** queued.
+- **Priority Crawl Request**: Executed URL Inspection on `https://www.jantahr.com/` and triggered **Priority Crawl & Indexing** (`Indexing requested`). Googlebot prioritizes crawling the homepage and following sitemap routes over the next 24–48 hours.

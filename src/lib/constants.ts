@@ -34,8 +34,16 @@ export const FORMSPREE_ENDPOINT =
   import.meta.env.VITE_FORMSPREE_CONTACT_ENDPOINT?.trim() ||
   'https://formspree.io/f/xnjbagpr'
 
-export const AI_TRAINING_ENDPOINT =
+const OPS_LEADS_ENDPOINT =
+  'https://qjsgqskigjqrzjftunhg.supabase.co/functions/v1/public-leads'
+const configuredTrainingEndpoint =
   import.meta.env.VITE_AI_TRAINING_REGISTRATION_ENDPOINT?.trim()
+
+// The site's CSP blocks script.google.com, so an Apps Script URL here can never work.
+export const AI_TRAINING_ENDPOINT =
+  configuredTrainingEndpoint && !configuredTrainingEndpoint.includes('script.google.com')
+    ? configuredTrainingEndpoint
+    : OPS_LEADS_ENDPOINT
 
 export const SITE_URL = (import.meta.env.VITE_SITE_URL?.trim() || BRAND.url).replace(/\/$/, '')
 

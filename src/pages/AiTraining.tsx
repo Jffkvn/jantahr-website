@@ -92,10 +92,9 @@ export default function AiTraining() {
         window.location.href = `mailto:hello@jantahr.com?subject=${subject}&body=${body}`
         setSuccess(true)
       } else {
-        const isAppsScript = new URL(AI_TRAINING_ENDPOINT).hostname.endsWith('script.google.com')
         const res = await fetch(AI_TRAINING_ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': isAppsScript ? 'text/plain;charset=utf-8' : 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         })
         if (!res.ok) throw new Error(`Failed with status ${res.status}`)

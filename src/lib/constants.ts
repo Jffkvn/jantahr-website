@@ -34,6 +34,13 @@ export const FORMSPREE_ENDPOINT =
   import.meta.env.VITE_FORMSPREE_CONTACT_ENDPOINT?.trim() ||
   'https://formspree.io/f/xnjbagpr'
 
+// Contact form → JantaHR Ops (lead + team alert + confirmation email).
+// Deliberately a new variable name: an old VITE_FORMSPREE_CONTACT_ENDPOINT left
+// in Netlify can't override it.
+export const CONTACT_ENDPOINT =
+  import.meta.env.VITE_CONTACT_ENDPOINT?.trim() ||
+  'https://qjsgqskigjqrzjftunhg.supabase.co/functions/v1/public-leads'
+
 const OPS_LEADS_ENDPOINT =
   'https://qjsgqskigjqrzjftunhg.supabase.co/functions/v1/public-leads'
 const configuredTrainingEndpoint =

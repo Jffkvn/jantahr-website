@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Mail, Phone, MapPin, Linkedin, Instagram, Twitter, Send, CheckCircle, Briefcase } from 'lucide-react'
 import Reveal from '@/components/effects/Reveal'
 import PageHero from '@/components/ui/PageHero'
-import { BRAND, FORMSPREE_ENDPOINT } from '@/lib/constants'
+import { BRAND, CONTACT_ENDPOINT } from '@/lib/constants'
 import { trackEvent } from '@/components/AnalyticsManager'
 
 type ContactForm = {
@@ -50,25 +50,31 @@ export default function Contact() {
     setErrors(errs)
     if (Object.keys(errs).length) return
 
+    // Hidden honeypot: real visitors never fill it in.
+    const honeypot =
+      ((ev.currentTarget as HTMLFormElement).elements.namedItem('_gotcha') as HTMLInputElement | null)?.value.trim() ?? ''
+
     setSending(true)
     try {
-      const fd = new FormData()
-      fd.append('name', form.name.trim())
-      fd.append('email', form.email.trim())
-      fd.append('company', form.company.trim())
-      fd.append('phone', form.phone.trim())
-      fd.append('interest', form.interest)
-      fd.append('message', form.message.trim())
-      fd.append('_subject', `JantaHR inquiry: ${form.interest || 'General'}`)
-      fd.append('_gotcha', (ev.currentTarget as HTMLFormElement).querySelector('[name="_gotcha"]')?.getAttribute('value') || '')
-
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: fd,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          leadType: 'contact',
+          fullName: form.name.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim() || undefined,
+          organization: form.company.trim() || undefined,
+          interest: form.interest || 'General',
+          message: form.message.trim(),
+          honeypot,
+          sourcePage: '/contact',
+          submittedAt: new Date().toISOString(),
+        }),
       })
 
-      if (!res.ok) throw new Error(`Failed with status ${res.status}`)
+      const result = (await res.json().catch(() => null)) as { ok?: boolean } | null
+      if (!res.ok || !result?.ok) throw new Error(`Failed with status ${res.status}`)
 
       trackEvent('generate_lead', {
         event_category: 'Contact',
@@ -207,7 +213,6 @@ export default function Contact() {
 
                     <form onSubmit={handleSubmit} className="mt-7 space-y-5">
                       <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
-                      <input type="hidden" name="_subject" value="New Contact Form Submission" />
 
                       <div className="grid gap-5 sm:grid-cols-2">
                         <Field label="Full name *" id="name" error={errors.name}>

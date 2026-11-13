@@ -223,8 +223,8 @@ export default function JobDetail() {
     }
   }
 
-  const validateScreeningQuestions = (): boolean => {
-    if (!job?.screeningQuestions || job.screeningQuestions.length === 0) return true
+  const validateScreeningQuestions = (): string | null => {
+    if (!job?.screeningQuestions || job.screeningQuestions.length === 0) return null
 
     const errorsMap: Record<string, string> = {}
     for (const q of job.screeningQuestions) {
@@ -237,7 +237,7 @@ export default function JobDetail() {
     }
 
     setScreeningErrors(errorsMap)
-    return Object.keys(errorsMap).length === 0
+    return Object.keys(errorsMap)[0] ?? null
   }
 
   const onSubmit = async (values: FormValues) => {
@@ -246,6 +246,9 @@ export default function JobDetail() {
 
     if (values.honeypot) {
       setSubmitSuccess(true)
+      requestAnimationFrame(() => {
+        document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      })
       return
     }
 
@@ -257,9 +260,9 @@ export default function JobDetail() {
     }
 
     // Validate custom screening questions
-    if (!validateScreeningQuestions()) {
-      const firstErrId = Object.keys(screeningErrors)[0]
-      const el = document.getElementById(`sq-field-${firstErrId}`)
+    const firstScreeningErrorId = validateScreeningQuestions()
+    if (firstScreeningErrorId) {
+      const el = document.getElementById(`sq-field-${firstScreeningErrorId}`)
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
       return
     }
@@ -322,12 +325,18 @@ export default function JobDetail() {
       setResumeFile(null)
       setCoverLetterFile(null)
       setScreeningAnswers({})
+      requestAnimationFrame(() => {
+        document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      })
     } catch (err: unknown) {
       const message =
         err instanceof Error
           ? err.message
           : 'Could not complete your application. Please verify your details or contact us directly.'
       setSubmitError(message)
+      requestAnimationFrame(() => {
+        document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
     } finally {
       setIsSubmitting(false)
     }

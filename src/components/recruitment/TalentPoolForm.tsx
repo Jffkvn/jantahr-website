@@ -188,9 +188,15 @@ export default function TalentPoolForm({ onClose }: TalentPoolFormProps) {
       reset()
       setCvFile(null)
       setCoverFile(null)
+      requestAnimationFrame(() => {
+        document.getElementById('cv-upload')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      })
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'An error occurred during submission.'
       setSubmitError(message)
+      requestAnimationFrame(() => {
+        document.getElementById('cv-upload')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
     } finally {
       setSubmitting(false)
       setSubmitStep('')

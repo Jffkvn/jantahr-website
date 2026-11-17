@@ -42,10 +42,11 @@ export default function Jobs() {
 
   const categories = [
     'All',
+    'Human Resources',
     'Finance & Accounting',
     'Technology & Engineering',
-    'Human Resources',
     'Sales & Business Development',
+    'Operations & Logistics',
   ]
 
   const filteredJobs = jobs.filter((job) => {
@@ -81,7 +82,7 @@ export default function Jobs() {
       />
 
       {/* Main Section */}
-      <section className="section-pad">
+      <section className="py-10 lg:py-14">
         <div className="container-page">
           {loading ? (
             <div className="flex items-center justify-center py-24" role="status">
@@ -232,10 +233,7 @@ export default function Jobs() {
                           <div className="space-y-3">
                             <div className="flex flex-wrap items-center gap-2.5">
                               <span className="rounded-full bg-teal-primary/10 px-3 py-1 text-xs font-semibold text-teal-primary">
-                                {job.category || 'Role'}
-                              </span>
-                              <span className="rounded-full bg-ink/[0.04] px-3 py-1 text-xs font-medium text-slate-muted">
-                                Job #{job.id}
+                                {job.category || 'Human Resources'}
                               </span>
                             </div>
 

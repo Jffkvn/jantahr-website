@@ -433,140 +433,124 @@ export default function JobDetail() {
 
   return (
     <div className="bg-offwhite text-ink pb-20">
-      {/* Role Hero Banner */}
-      <section className="relative overflow-hidden bg-teal-deep pt-28 pb-16 text-white lg:pt-32 lg:pb-20">
+      {/* Compact Role Hero Banner */}
+      <section className="relative overflow-hidden bg-teal-deep pt-24 pb-6 text-white lg:pt-24 lg:pb-8">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-mesh-dark opacity-40" />
           <div className="absolute inset-0 bg-grain opacity-10 mix-blend-overlay" />
         </div>
 
         <div className="container-page relative z-10">
-          {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-xs font-medium text-white/70">
-            <Link to="/jobs" className="transition-colors hover:text-cyan-accent flex items-center gap-1">
-              <ArrowLeft className="h-3.5 w-3.5" />
-              All Open Roles
-            </Link>
-            <span>/</span>
-            <span className="truncate text-white/90">{job.title}</span>
-          </nav>
+          <div className="mx-auto max-w-4xl">
+            {/* Breadcrumb + Category */}
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <nav className="flex items-center gap-2 text-xs font-medium text-white/70">
+                <Link to="/jobs" className="transition-colors hover:text-cyan-accent flex items-center gap-1">
+                  <ArrowLeft className="h-3.5 w-3.5" />
+                  All Open Roles
+                </Link>
+                <span>/</span>
+                <span className="truncate text-white/90">{job.title}</span>
+              </nav>
 
-          <div className="max-w-4xl">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-accent/30 bg-cyan-accent/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-accent">
-                <Briefcase className="h-3.5 w-3.5" />
-                {job.category || 'Professional Opportunity'}
-              </span>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
-                Job #{job.id}
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-accent/30 bg-cyan-accent/10 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-cyan-accent">
+                <Briefcase className="h-3 w-3" />
+                {job.category || 'Human Resources'}
               </span>
             </div>
 
-            <h1 className="mt-4 font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight">
-              {job.title}
-            </h1>
+            <div className="mt-3 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <h1 className="font-heading text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl leading-tight">
+                  {job.title}
+                </h1>
 
-            {/* Quick Metadata Bar */}
-            <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-medium text-white/80 sm:text-sm">
-              <span className="inline-flex items-center gap-1.5">
-                <Building2 className="h-4 w-4 text-cyan-accent" />
-                Company: {job.company || 'Corporate Client'}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <MapPin className="h-4 w-4 text-cyan-accent" />
-                {job.location || 'Kampala, Uganda'}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Clock className="h-4 w-4 text-cyan-accent" />
-                {job.employmentType || job.type || 'Full-time'}
-              </span>
-              {job.postedAt && (
-                <span className="inline-flex items-center gap-1.5">
-                  <Calendar className="h-4 w-4 text-cyan-accent" />
-                  Posted: {new Date(job.postedAt).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}
-                </span>
-              )}
-            </div>
+                {/* Quick Metadata Bar */}
+                <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-medium text-white/85 sm:text-sm">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Building2 className="h-4 w-4 text-cyan-accent" />
+                    Client: {job.company || 'Confidential Client'}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <MapPin className="h-4 w-4 text-cyan-accent" />
+                    {job.location || 'Uganda'}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Clock className="h-4 w-4 text-cyan-accent" />
+                    {job.employmentType || job.type || 'Full time'}
+                  </span>
+                  {job.postedAt && (
+                    <span className="inline-flex items-center gap-1.5">
+                      <Calendar className="h-4 w-4 text-cyan-accent" />
+                      Posted: {new Date(job.postedAt).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}
+                    </span>
+                  )}
+                </div>
+              </div>
 
-            {/* Hero CTAs: Smooth scroll to Apply Form & Share */}
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                onClick={scrollToApplyForm}
-                className="btn btn-primary btn-lg inline-flex items-center gap-2 shadow-lg hover:shadow-cyan-accent/20 transition-all cursor-pointer"
-              >
-                Apply for this Role
-                <ArrowDown className="h-4 w-4" />
-              </button>
+              {/* Hero CTAs: Smooth scroll to Apply Form & Share */}
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={scrollToApplyForm}
+                  className="btn btn-primary btn-md inline-flex items-center gap-2 shadow-lg hover:shadow-cyan-accent/20 transition-all cursor-pointer"
+                >
+                  Apply for this Role
+                  <ArrowDown className="h-4 w-4" />
+                </button>
 
-              <button
-                type="button"
-                onClick={handleCopyLink}
-                className="btn btn-outline btn-lg text-white border-white/20 hover:bg-white/10 inline-flex items-center gap-2 cursor-pointer"
-              >
-                <Share2 className="h-4 w-4" />
-                {copiedLink ? 'Link Copied!' : 'Share this Role'}
-              </button>
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="btn btn-outline btn-md text-white border-white/20 hover:bg-white/10 inline-flex items-center gap-2 cursor-pointer"
+                >
+                  <Share2 className="h-4 w-4" />
+                  {copiedLink ? 'Link Copied!' : 'Share'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Main Editorial Content & Anchored Form */}
-      <section className="section-pad">
+      <section className="py-6 lg:py-8">
         <div className="container-page">
-          <div className="mx-auto max-w-4xl space-y-10">
+          <div className="mx-auto max-w-4xl space-y-6">
 
             {/* 1. About the Role */}
-            <div className="rounded-3xl border border-ink/[0.08] bg-white p-6 shadow-card sm:p-10">
-              <h2 className="font-heading text-2xl font-bold text-ink">About the Role</h2>
-              <div className="mt-5 space-y-4 text-sm leading-relaxed text-ink/80 sm:text-base">
+            <div className="rounded-3xl border border-ink/[0.08] bg-white p-6 shadow-card sm:p-8">
+              <h2 className="font-heading text-xl font-bold text-ink sm:text-2xl">About the Role</h2>
+              <div className="mt-3 space-y-3 text-sm leading-relaxed text-ink/85 sm:text-base">
                 {job.description ? (
                   <p className="whitespace-pre-line leading-relaxed">{job.description}</p>
                 ) : job.summary ? (
                   <p className="whitespace-pre-line leading-relaxed">{job.summary}</p>
                 ) : (
                   <p>
-                    We are hiring a {job.title} to join the team in {job.location || 'Kampala, Uganda'}. In this role, you will work closely with cross-functional leadership to drive growth, quality delivery, and strategic business outcomes.
+                    We are hiring a {job.title} to join the team in {job.location || 'Uganda'}.
                   </p>
                 )}
               </div>
             </div>
 
             {/* 2. What You’ll Do (Responsibilities) */}
-            {(job.responsibilities || job.summary) && (
-              <div className="rounded-3xl border border-ink/[0.08] bg-white p-6 shadow-card sm:p-10">
-                <h2 className="font-heading text-2xl font-bold text-ink">What You’ll Do</h2>
-                <p className="mt-2 text-sm text-slate-muted">
-                  Here is what you will be responsible for and leading on a day-to-day basis:
+            {job.responsibilities && job.responsibilities.length > 0 && (
+              <div className="rounded-3xl border border-ink/[0.08] bg-white p-6 shadow-card sm:p-8">
+                <h2 className="font-heading text-xl font-bold text-ink sm:text-2xl">What You’ll Do</h2>
+                <p className="mt-1.5 text-sm text-slate-muted">
+                  Key responsibilities and day-to-day deliverables for this role:
                 </p>
-                {job.responsibilities ? (
-                  renderBulletList(job.responsibilities)
-                ) : (
-                  <ul className="mt-4 space-y-3">
-                    <li className="flex items-start gap-3 text-sm text-ink/80 leading-relaxed sm:text-base">
-                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal-primary" />
-                      <span>{job.summary}</span>
-                    </li>
-                    <li className="flex items-start gap-3 text-sm text-ink/80 leading-relaxed sm:text-base">
-                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal-primary" />
-                      <span>Collaborate closely with department heads and operational teams to achieve key milestones.</span>
-                    </li>
-                    <li className="flex items-start gap-3 text-sm text-ink/80 leading-relaxed sm:text-base">
-                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal-primary" />
-                      <span>Ensure statutory compliance, reporting accuracy, and operational excellence across workflows.</span>
-                    </li>
-                  </ul>
-                )}
+                {renderBulletList(job.responsibilities)}
               </div>
             )}
 
             {/* 3. What We Need (Requirements) */}
             {job.requirements && (
-              <div className="rounded-3xl border border-ink/[0.08] bg-white p-6 shadow-card sm:p-10">
-                <h2 className="font-heading text-2xl font-bold text-ink">What We Need</h2>
-                <p className="mt-2 text-sm text-slate-muted">
-                  The background, skills, and qualifications we are looking for:
+              <div className="rounded-3xl border border-ink/[0.08] bg-white p-6 shadow-card sm:p-8">
+                <h2 className="font-heading text-xl font-bold text-ink sm:text-2xl">What We Need</h2>
+                <p className="mt-1.5 text-sm text-slate-muted">
+                  Qualifications, experience, and personal attributes we are looking for:
                 </p>
                 {renderBulletList(job.requirements)}
               </div>

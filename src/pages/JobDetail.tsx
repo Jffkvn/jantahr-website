@@ -54,7 +54,6 @@ const formSchema = z.object({
   linkedinUrl: z.string().min(3, 'LinkedIn profile link is required.'),
   headline: z.string().optional(),
   availability: z.string().optional(),
-  salaryExpectation: z.string().optional(),
   coverLetterText: z.string().optional(),
   honeypot: z.string().max(0, 'Spam detected').optional(),
   consent: z.literal(true, {
@@ -107,7 +106,6 @@ export default function JobDetail() {
       linkedinUrl: '',
       headline: '',
       availability: '30_days',
-      salaryExpectation: '',
       coverLetterText: '',
       honeypot: '',
       consent: true,
@@ -300,10 +298,6 @@ export default function JobDetail() {
         .filter(Boolean)
         .join('\n\n')
 
-      const parsedSalary = values.salaryExpectation
-        ? Number(values.salaryExpectation.replace(/\D/g, ''))
-        : undefined
-
       // Step 3: Register candidate profile with vacancy slug and screening answers
       await submitCandidateApplication({
         fullName,
@@ -311,7 +305,6 @@ export default function JobDetail() {
         phone: values.phone.trim(),
         headline: values.headline?.trim() || undefined,
         availability: values.availability || undefined,
-        salaryExpectation: parsedSalary && Number.isFinite(parsedSalary) ? parsedSalary : undefined,
         cvPath,
         vacancySlug: slug,
         screeningAnswers: Object.keys(screeningAnswers).length > 0 ? screeningAnswers : undefined,
@@ -669,7 +662,7 @@ export default function JobDetail() {
                         Apply for this Job
                       </h3>
                       <p className="text-xs text-slate-muted mt-1">
-                        {job.title} · Job #{job.id}
+                        {job.title}
                       </p>
                     </div>
                     <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600">
@@ -834,19 +827,6 @@ export default function JobDetail() {
                             <option value="60_days">2 Months</option>
                             <option value="not_actively_looking">Exploring opportunities</option>
                           </select>
-                        </div>
-
-                        {/* Expected Salary (UGX) */}
-                        <div className="sm:col-span-2">
-                          <label className="block text-xs font-bold uppercase tracking-wider text-ink mb-1.5">
-                            Expected Gross Salary (UGX)
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="e.g. 7,000,000"
-                            className="input-base"
-                            {...register('salaryExpectation')}
-                          />
                         </div>
                       </div>
                     </div>
